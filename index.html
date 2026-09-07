@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Letter Legends</title>
+<meta name="description" content="Letter Legends is a word game of quick rounds, clever spelling and rival legends. Climb the level path, then battle friends turn by turn.">
+<style>
+  :root{--ink:#0b1030;--paper:#f7f4ff;--violet:#5b4bff;--pink:#eb68e0;--gold:#ffc63b;--muted:#5d5a7a}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ink);color:#fff;font-family:-apple-system,system-ui,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+  main{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 24px;
+       background:radial-gradient(60% 40% at 50% 0%,rgba(91,75,255,.45),transparent 70%),radial-gradient(40% 30% at 85% 90%,rgba(235,104,224,.25),transparent 70%)}
+  h1{font-size:clamp(40px,9vw,88px);line-height:.95;margin:0 0 16px;letter-spacing:-.02em;text-wrap:balance}
+  h1 span{display:block;color:var(--gold)}
+  p.lead{max-width:34ch;margin:0 auto 32px;font-size:clamp(17px,2.6vw,21px);color:#d9d6ff;text-wrap:balance}
+  .stores{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  a.btn{display:inline-block;padding:16px 26px;border-radius:14px;background:var(--violet);color:#fff;text-decoration:none;font-weight:600;font-size:17px}
+  a.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+  .soon{padding:16px 26px;border-radius:14px;border:1px solid rgba(255,255,255,.25);color:#d9d6ff;font-size:17px}
+  footer{padding:24px;text-align:center;font-size:14px;color:var(--muted)}
+  footer a{color:#b9b4ff;text-decoration:none;margin:0 10px}
+  @media (prefers-reduced-motion:no-preference){h1{animation:rise .7s ease-out both}p.lead,.stores{animation:rise .7s .12s ease-out both}}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Letter <span>Legends</span></h1>
+  <p class="lead">A word game of quick rounds, clever spelling and rival legends. Climb the level path, then battle friends turn by turn.</p>
+  <div class="stores">
+    <a class="btn" href="https://play.google.com/store/apps/details?id=com.glitchyard.letterlegends">Get it on Google Play</a>
+    <span class="soon">App Store: coming soon</span>
+  </div>
+</main>
+<footer>
+  <a href="https://glitchyard.studio">GlitchYard</a>
+  <a href="https://glitchyard.studio/privacy.html">Privacy</a>
+  <a href="https://glitchyard.studio/terms.html">Terms</a>
+</footer>
+</body>
+</html>
