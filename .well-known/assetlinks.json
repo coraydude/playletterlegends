@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.glitchyard.letterlegends",
+      "sha256_cert_fingerprints": [
+        "6C:59:54:E2:9F:5C:CF:E5:A9:51:4B:EA:04:48:8B:F8:18:E8:BC:50:23:A7:33:34:C3:A3:F4:93:0E:8D:F8:94"
+      ]
+    }
+  }
+]

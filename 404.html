@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Letter Legends</title>
+<style>
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+       font-family:-apple-system,system-ui,"Segoe UI",Roboto,sans-serif;background:#0b1030;color:#fff;text-align:center}
+  main{padding:32px;max-width:420px}
+  h1{font-weight:600;font-size:24px;margin:0 0 8px}
+  p{margin:0 0 24px;opacity:.85;line-height:1.4}
+  a.btn{display:block;margin:10px 0;padding:16px 22px;border-radius:14px;background:#4a5cff;color:#fff;
+        text-decoration:none;font-weight:600;font-size:17px}
+  a.btn.ios{background:#1c2354}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<main>
+  <h1>Letter Legends</h1>
+  <p id="lede">Your friend wants to play with you. Get the game and their invite counts.</p>
+  <a id="android" class="btn" href="#">Get it on Google Play</a>
+  <a id="ios" class="btn ios hidden" href="#">Download on the App Store</a>
+  <p id="iosSoon" class="hidden">Coming soon to the App Store.</p>
+</main>
+<script>
+(function () {
+  // The invite code rides in the path: /i/<CODE>. It is the inviter's PlayFab id (16 hex).
+  var ANDROID_PACKAGE = "com.glitchyard.letterlegends";
+  var APP_STORE_ID = "6785250916";   // App Store Connect Apple ID (StoreMetadata.AppStoreId)
+  var APP_STORE_LIVE = false;         // flip to true the day the App Store listing is published
+  var m = /\/i\/([0-9A-Za-z]{1,32})/.exec(location.pathname);
+  var code = m ? m[1].toUpperCase() : "";
+  if (!code) { var l = document.getElementById("lede"); if (l) l.textContent = "The word game where every letter counts. Free on Google Play."; }
+  var referrer = code ? "&referrer=" + encodeURIComponent("ll_invite=" + code) : "";
+  var play = "https://play.google.com/store/apps/details?id=" + ANDROID_PACKAGE + referrer;
+  var ios = (APP_STORE_ID && APP_STORE_LIVE) ? "https://apps.apple.com/app/id" + APP_STORE_ID : "";
+  var ua = navigator.userAgent || "";
+  var isAndroid = /Android/i.test(ua);
+  var isIos = /iPhone|iPad|iPod/i.test(ua);
+
+  document.getElementById("android").href = play;
+  var iosBtn = document.getElementById("ios");
+  if (ios) { iosBtn.href = ios; iosBtn.classList.remove("hidden"); }
+  else if (isIos) { document.getElementById("iosSoon").classList.remove("hidden"); }
+
+  // Record the click (same-origin rewrite to the inviteClick function) so the game can
+  // match it on the friend's first launch — Apple has no install referrer. Fire-and-forget:
+  // sendBeacon survives the redirect below; the store bounce never waits on it.
+  if (code) {
+    try {
+      var payload = JSON.stringify({ code: code, platform: isAndroid ? "android" : (isIos ? "ios" : "other") });
+      // Cross-site from GitHub Pages: text/plain is CORS-safelisted, so the beacon needs no preflight.
+      var CLICK = "https://us-central1-word-bayou.cloudfunctions.net/inviteClick";
+      if (!(navigator.sendBeacon && navigator.sendBeacon(CLICK, new Blob([payload], { type: "text/plain" }))))
+        fetch(CLICK, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: payload, keepalive: true }).catch(function () {});
+    } catch (e) {}
+  }
+
+  // Bounce straight to the store for the visitor's platform; the buttons stay as the fallback.
+  if (isAndroid) location.replace(play);
+  else if (isIos && ios) location.replace(ios);
+})();
+</script>
+</body>
+</html>
