@@ -288,55 +288,40 @@ h1, h2, h3, p, figure, ol { margin: 0; }
 
 /* word of the day: the scrambled rack sorts itself into LEGENDS, holds, then scrambles again */
 .wotd { --t: clamp(40px, 5.2vw, 70px); display: flex; gap: calc(var(--t) * .1); }
-.wotd img { width: var(--t); filter: drop-shadow(0 8px 10px rgba(5,30,80,.3)); translate: calc(var(--dx) * var(--t) * 1.1) 0; }
-.bx.is-on .wotd img { animation: unscramble 5.2s cubic-bezier(.5,0,.2,1) infinite; }
-.bx.is-on .wotd img:nth-child(2) { animation-delay: .06s; } .bx.is-on .wotd img:nth-child(3) { animation-delay: .12s; } .bx.is-on .wotd img:nth-child(4) { animation-delay: .18s; }
-.bx.is-on .wotd img:nth-child(5) { animation-delay: .24s; } .bx.is-on .wotd img:nth-child(6) { animation-delay: .3s; } .bx.is-on .wotd img:nth-child(7) { animation-delay: .36s; }
-@keyframes unscramble {
-  0%, 14% { translate: calc(var(--dx) * var(--t) * 1.1) 0; rotate: 0deg; }
-  22% { translate: calc(var(--dx) * var(--t) * .55) calc(var(--t) * -.35); rotate: -6deg; }
-  32%, 82% { translate: 0 0; rotate: 0deg; }
-  90% { translate: calc(var(--dx) * var(--t) * .55) calc(var(--t) * -.3); rotate: 5deg; }
-  100% { translate: calc(var(--dx) * var(--t) * 1.1) 0; rotate: 0deg; } }
-
+.wotd img { width: var(--t); filter: drop-shadow(0 8px 10px rgba(5,30,80,.3)); will-change: transform; }
 /* languages: stacked pills, the front one flips through the ten languages */
 .lang { position: relative; padding-top: 16px; }
 .lang::before, .lang::after { content: ''; position: absolute; left: 10%; right: 10%; height: 100%; top: 0; border-radius: 14px; background: rgba(255,255,255,.45); }
-.lang::after { left: 5%; right: 5%; top: 8px; background: rgba(255,255,255,.7); }
-.lang__pill { position: relative; z-index: 1; display: inline-flex; gap: 6px; align-items: baseline; min-width: 210px; justify-content: center; padding: 14px 22px; border-radius: 14px; background: #fff; color: var(--ink); box-shadow: 0 10px 20px rgba(5,30,80,.25); }
+.lang::before { transform: translateY(calc(var(--lag, 0) * -6px)) rotate(calc(var(--lag, 0) * -2deg)); }
+.lang::after { left: 5%; right: 5%; top: 8px; background: rgba(255,255,255,.7); transform: translateY(calc(var(--lag, 0) * -3px)) rotate(calc(var(--lag, 0) * 1.5deg)); }
+.lang__pill { will-change: transform; position: relative; z-index: 1; display: inline-flex; gap: 6px; align-items: baseline; min-width: 210px; justify-content: center; padding: 14px 22px; border-radius: 14px; background: #fff; color: var(--ink); box-shadow: 0 10px 20px rgba(5,30,80,.25); }
 .lang__pill small { font-weight: 800; color: #6B7896; font-size: 15px; }
 .lang__pill b { font-weight: 900; font-size: 17px; }
-.lang__pill.is-flip b { animation: flip-in .45s cubic-bezier(.2,.9,.3,1.3); }
-@keyframes flip-in { from { opacity: 0; translate: 0 10px; } }
 
 /* leagues: the ring fills while the bolt count climbs (like lesa's score ring) */
 .ring { position: relative; width: clamp(130px, 13vw, 170px); aspect-ratio: 1; }
 .ring svg { width: 100%; rotate: -90deg; }
 .ring circle { fill: none; stroke: rgba(255,255,255,.22); stroke-width: 12; }
-.ring .ring__fill { stroke: var(--sun); stroke-linecap: round; stroke-dasharray: calc(var(--p) * 1) 100; transition: stroke-dasharray .12s linear; }
-.ring__in { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 2px; }
-.ring__in img { width: 34%; }
-.ring__in b { font: 400 clamp(28px, 2.6vw, 36px)/1 var(--head); }
+.ring .ring__fill { stroke: var(--sun); stroke-linecap: round; stroke-dasharray: calc(var(--p) * 1) 100; }
+.ring__in { position: absolute; inset: 0; display: grid; place-items: center; }
+.trophy { grid-area: 1 / 1; width: 54%; opacity: 0; will-change: transform, opacity; filter: drop-shadow(0 8px 10px rgba(5,30,80,.3)); }
+.league { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.bolts { display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px 6px 8px; border-radius: 999px; background: #fff; color: var(--ink); box-shadow: 0 8px 16px rgba(5,30,80,.22); }
+.bolts img { width: 30px; will-change: transform; }
+.bolts b { font: 400 24px/1 var(--head); min-width: 2ch; }
 
 /* letter pass: the track fills and each reward pops as the fill reaches it */
 .pass { position: relative; width: min(100%, 300px); height: 90px; }
 .pass__bar { position: absolute; left: 0; right: 0; top: 50%; height: 16px; margin-top: -8px; border-radius: 99px; background: rgba(255,255,255,.25); overflow: hidden; }
-.pass__bar i { position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, #FFE27A, #F5A30B); transform-origin: left; scale: 0 1; }
-.pass img { position: absolute; top: 50%; left: calc(var(--at) * 100%); width: 50px; translate: -50% -50%; filter: drop-shadow(0 6px 8px rgba(5,30,80,.3)); scale: .7; opacity: .55; }
+.pass__bar i { position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, #FFE27A, #F5A30B); transform-origin: left; transform: scaleX(0); }
+.pass img { position: absolute; top: 50%; left: calc(var(--at) * 100%); width: 50px; filter: drop-shadow(0 6px 8px rgba(5,30,80,.3)); transform: translate(-50%, -50%) scale(.72); opacity: .55; }
 .pass img:last-child { width: 64px; }
-.bx.is-on .pass__bar i { animation: pass-fill 4.4s cubic-bezier(.4,0,.3,1) infinite; }
-.bx.is-on .pass img { animation: pass-pop 4.4s infinite; animation-delay: calc(var(--at) * 3.1s); }
-@keyframes pass-fill { 0% { scale: 0 1; } 75%, 92% { scale: 1 1; } 100% { scale: 0 1; opacity: 0; } }
-@keyframes pass-pop { 0% { scale: .7; opacity: .55; } 6% { scale: 1.35; opacity: 1; } 12%, 60% { scale: 1; opacity: 1; } 70%, 100% { scale: .7; opacity: .55; } }
 
 /* make it your own: the four frames take turns being worn */
 .frames4 { display: flex; gap: clamp(8px, 1.4vw, 20px); }
-.frames4 img { width: clamp(64px, 8vw, 110px); filter: drop-shadow(0 8px 12px rgba(5,30,80,.3)); opacity: .55; scale: .85; transition: scale .5s cubic-bezier(.3,1.6,.5,1), opacity .4s; }
-.frames4 img.is-worn { opacity: 1; scale: 1.18; }
+.frames4 img { width: clamp(64px, 8vw, 110px); filter: drop-shadow(0 8px 12px rgba(5,30,80,.3)); opacity: .55; transform: scale(.85); transition: opacity .3s; will-change: transform; }
 
 /* play at your pace: the turn pill cycles through a battle's moments */
 .turns__pill { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; background: #fff; color: var(--ink); font-weight: 900; font-size: 17px; box-shadow: 0 10px 20px rgba(5,30,80,.25); }
 .turns__pill i { width: 12px; height: 12px; border-radius: 50%; background: #2BC160; box-shadow: 0 0 0 5px rgba(43,193,96,.25); }
 .turns__pill.is-wait i { background: var(--sun); box-shadow: 0 0 0 5px rgba(255,198,59,.3); }
-.turns__pill.is-flip b { animation: flip-in .45s cubic-bezier(.2,.9,.3,1.3); }
-@media (prefers-reduced-motion: reduce) { .wotd img { translate: 0 0; } .pass__bar i { scale: 1 1; } .pass img { scale: 1; opacity: 1; } .frames4 img { opacity: 1; scale: 1; } }
