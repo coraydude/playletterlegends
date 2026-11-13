@@ -201,10 +201,13 @@ h1, h2, h3, p, figure, ol { margin: 0; }
 .foot__links { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 6px; margin-top: 8px; }
 .foot__links a { padding: 6px 10px; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 14px; opacity: .9; }
 .foot__links a:hover { background: rgba(255,255,255,.15); opacity: 1; }
-.foot__art { position: relative; margin-top: clamp(40px, 5vw, 70px); height: clamp(260px, 30vw, 460px); }
-.ph--burst { position: absolute; inset: 0 var(--gut) 30%; border-radius: 30px 30px 0 0; }
-.foot__word { position: absolute; left: 0; right: 0; bottom: -.12em; font: 400 calc((100vw - var(--rail)) * .138)/.8 var(--head); text-transform: uppercase; color: #fff; white-space: nowrap; text-shadow: 0 .05em 0 rgba(10,70,170,.35); }
-.foot__base { position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding: 18px var(--gut); background: var(--sky); box-shadow: inset 0 1px 0 rgba(255,255,255,.18); font-size: 13px; text-align: left; }
+/* the legends stand ON the wordmark: the crew art's flat bottom edge (92.4% down; the rest is the feet's
+   overhang, 0.0278 x its width) lands on the letters' tops (0.051em under the word's .8 line box, measured on the rendered L/T stems) */
+.foot__art { --fw: calc((100vw - var(--rail)) * .138); --cw: min(74vw, 1000px); position: relative; margin-top: clamp(40px, 5vw, 70px);
+  display: flex; flex-direction: column; align-items: center; }
+.foot__crew { position: relative; z-index: 2; width: var(--cw); margin-bottom: calc(-1 * (var(--fw) * .051 + var(--cw) * .0278)); filter: drop-shadow(0 10px 14px rgba(10,50,130,.3)); }
+.foot__word { position: relative; z-index: 1; width: 100%; margin-bottom: -.12em; font: 400 var(--fw)/.8 var(--head); text-transform: uppercase; color: #fff; white-space: nowrap; text-shadow: 0 .05em 0 rgba(10,70,170,.35); }
+.foot__base { position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding: 18px calc(var(--gut) + 76px) 18px var(--gut); background: var(--sky); /* right padding clears the back-to-top button */ box-shadow: inset 0 1px 0 rgba(255,255,255,.18); font-size: 13px; text-align: left; }
 .foot__base p { opacity: .85; }
 .foot__base p:last-child { max-width: 52em; }
 
