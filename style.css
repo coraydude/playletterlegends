@@ -112,7 +112,7 @@ h1, h2, h3, p, figure, ol { margin: 0; }
 .mission__text { max-width: 22em; font: 400 clamp(30px, 3.9vw, 58px)/1.08 var(--head); text-transform: uppercase; text-shadow: 0 4px 0 rgba(10,60,140,.25); }
 .mission__text .w { opacity: .3; transition: opacity .25s; }
 .mission__text .w.is-lit { opacity: 1; }
-.mission__text .w.is-gold.is-lit { color: var(--sun); }
+.mission__text .w.is-gold.is-lit { color: var(--ink); text-shadow: 0 4px 0 rgba(255,255,255,.25); }
 .mission__props { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
 .prop { position: absolute; left: calc((100% - var(--w)) * var(--x) / 100); width: var(--w); rotate: var(--r, 0deg); filter: drop-shadow(0 14px 16px rgba(5,40,110,.35)); will-change: transform; }
 @media (prefers-reduced-motion: no-preference) {
