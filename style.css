@@ -130,22 +130,21 @@ h1, h2, h3, p, figure, ol { margin: 0; }
 .chip small { display: block; font-size: 13px; opacity: .8; }
 .ph--chip { width: 44px; height: 44px; border-radius: 12px; }
 
-/* ── mission ── */
-.mission { min-height: 120svh; display: grid; place-items: center; text-align: center; }
-.mission__text { max-width: 22em; font: 400 clamp(30px, 3.9vw, 58px)/1.08 var(--head); text-transform: uppercase; }
+/* ── mission: pinned text, props rising past it ── */
+.mission { height: 260svh; padding: 0; }
+.mission__stage { position: sticky; z-index: 2; top: var(--tick); height: calc(100svh - var(--tick)); display: grid; place-items: center; padding: 0 var(--gut); text-align: center; }
+.mission__text { max-width: 22em; font: 400 clamp(30px, 3.9vw, 58px)/1.08 var(--head); text-transform: uppercase; text-shadow: 0 4px 0 rgba(10,60,140,.25); }
 .mission__text .w { opacity: .3; transition: opacity .25s; }
 .mission__text .w.is-lit { opacity: 1; }
 .mission__text .w.is-gold.is-lit { color: var(--sun); }
-.ph--mascot { position: absolute; right: 8%; bottom: 8%; width: clamp(110px, 12vw, 170px); aspect-ratio: 1; border-radius: 50%; }
-
-/* ── cast (parallax placeholders) ── */
-.cast { height: clamp(520px, 70svh, 760px); padding: 0; overflow: hidden; }
-.prop { position: absolute; left: calc((100% - var(--w)) * var(--x) / 100); width: var(--w); /* --x places it in the room left after its own width: never off the edge */ rotate: var(--r, 0deg); filter: drop-shadow(0 14px 16px rgba(5,40,110,.35)); will-change: transform; }
+.mission__props { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+.prop { position: absolute; left: calc((100% - var(--w)) * var(--x) / 100); width: var(--w); rotate: var(--r, 0deg); filter: drop-shadow(0 14px 16px rgba(5,40,110,.35)); will-change: transform; }
 @media (prefers-reduced-motion: no-preference) {
   .prop { animation: bob 5.6s ease-in-out infinite alternate; }
   .prop:nth-child(2n) { animation-duration: 6.8s; animation-delay: -2s; }
   .prop:nth-child(3n) { animation-duration: 4.9s; animation-delay: -1s; }
 }
+@media (prefers-reduced-motion: reduce) { .mission { height: auto; } .mission__stage { position: relative; min-height: 100svh; } }
 
 /* ── the sheet ── */
 .sheet { position: relative; z-index: 2; margin: 0 12px; padding-bottom: 12svh; border-radius: 44px; background: var(--paper); color: var(--ink); box-shadow: 0 -20px 60px rgba(8,50,120,.2); }
@@ -257,7 +256,6 @@ h1, h2, h3, p, figure, ol { margin: 0; }
   .foot__base { flex-direction: column; }
   .fan3 { --pk: 24vw; } /* all three packs fit across a phone, fully open */
   .tag { font-size: 13px; padding: 5px 11px 8px; bottom: -10px; }
-  .ph--mascot { right: 6%; bottom: 4%; }
 }
 
 /* ── THE HOUSE BEVEL ───────────────────────────────────────────────────────────────────────────────

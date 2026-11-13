@@ -74,7 +74,7 @@
   const floats = [...document.querySelectorAll('[data-d]')].map((el) => ({ el, d: parseFloat(el.dataset.d), sec: el.closest('section') }));
   const cards = [...document.querySelectorAll('.stack__card')], rows = [...document.querySelectorAll('.row')];
   const fan3 = document.querySelector('.fan3');
-  const fab = document.querySelector('.fab');
+  const fab = document.querySelector('.fab'), missionSec = mission?.closest('section');
   let raf = 0, litN = -1;
   const frame = () => {
     raf = 0;
@@ -82,9 +82,9 @@
     fab.classList.toggle('is-on', scrollY > VH * 0.7); // back-to-top appears once the hero is behind you
     // mission: words light up as the paragraph travels up the screen
     if (mission) {
-      const r = mission.getBoundingClientRect();
+      const r = missionSec.getBoundingClientRect(); // the text is pinned: progress = scroll through its section
       if (r.bottom > -VH && r.top < VH * 2) {
-        const n = Math.round(words.length * cl((VH * 0.82 - r.top) / (r.height + VH * 0.35)));
+        const n = Math.round(words.length * cl((VH * 0.35 - r.top) / (r.height - VH * 0.9)));
         if (n !== litN) { words.forEach((w, i) => w.classList.toggle('is-lit', i < n)); litN = n; }
       }
     }
