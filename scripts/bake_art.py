@@ -160,11 +160,6 @@ if __name__ == '__main__':
         im = Image.open(os.path.join(GAME, f'Screenshots/devices/iphone-16-pro/{cap}.png')).convert('RGB')
         im = im.resize((660, round(im.height * 660 / im.width)), Image.LANCZOS)
         im.save(os.path.join(OUT, 'shots', f'ui-{name}.webp'), quality=86, method=6)
-    caps = ['words', 'friends', 'themes', 'events', 'minigames', 'yours', 'season']
-    for i, name in enumerate(caps, 1):
-        im = Image.open(os.path.join(GAME, f'scripts/play-listing/screens/en-US/phone/{i:02d}.jpg')).convert('RGB')
-        im = im.resize((560, round(im.height * 560 / im.width)), Image.LANCZOS)
-        im.save(os.path.join(OUT, 'shots', f'{name}.webp'), quality=82, method=6)
     # link-preview card: the game's sky, the logo, the crew resting on the bottom edge
     og = Image.new('RGBA', (1200, 630))
     top, bot = (0x17, 0x92, 0xFC), (0x9A, 0xB6, 0xF9)
@@ -178,4 +173,4 @@ if __name__ == '__main__':
     crew = crew.resize((760, round(crew.height * 760 / crew.width)), Image.LANCZOS)
     og.alpha_composite(crew, ((1200 - crew.width) // 2, 630 - round(crew.height * 0.924)))
     og.convert('RGB').save(os.path.join(OUT, 'og.png'), optimize=True)
-    print('baked', len(TILES), 'tiles +', len(art), 'art + 7 shots into', OUT)
+    print('baked', len(TILES), 'tiles +', len(art), 'art + 2 phone screens into', OUT)
