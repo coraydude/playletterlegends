@@ -182,7 +182,7 @@ h1, h2, h3, p, figure, ol { margin: 0; }
 .foot__crew { position: relative; z-index: 2; width: var(--cw); margin-bottom: calc(-1 * (var(--fw) * .051 + var(--cw) * .0278)); filter: drop-shadow(0 10px 14px rgba(10,50,130,.3)); }
 .foot__word { position: relative; z-index: 1; width: 100%; margin-bottom: -.12em; font: 400 var(--fw)/.8 var(--head); text-transform: uppercase; color: #fff; white-space: nowrap; text-shadow: 0 .05em 0 rgba(10,70,170,.35); }
 .foot__base { position: relative; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 28px; padding: 22px calc(var(--gut) + 76px) 22px var(--gut);
-  background: #2F1380; /* glitchyard.co's footer */ font-size: 13px; text-align: left; } /* right padding clears the back-to-top button */
+  background: #5B2BD6; /* GlitchYard violet */ font-size: 13px; text-align: left; } /* right padding clears the back-to-top button */
 .foot__base p { opacity: .8; }
 .foot__studio { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; transition: transform .2s cubic-bezier(.3,1.6,.5,1); }
 .foot__studio:hover { transform: translateY(-2px); }
