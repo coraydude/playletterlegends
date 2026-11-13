@@ -140,7 +140,12 @@ h1, h2, h3, p, figure, ol { margin: 0; }
 
 /* ── cast (parallax placeholders) ── */
 .cast { height: clamp(520px, 70svh, 760px); padding: 0; overflow: hidden; }
-.ph--float { position: absolute; width: var(--w); aspect-ratio: 1; border-radius: 40%; will-change: transform; }
+.prop { position: absolute; left: calc((100% - var(--w)) * var(--x) / 100); width: var(--w); /* --x places it in the room left after its own width: never off the edge */ rotate: var(--r, 0deg); filter: drop-shadow(0 14px 16px rgba(5,40,110,.35)); will-change: transform; }
+@media (prefers-reduced-motion: no-preference) {
+  .prop { animation: bob 5.6s ease-in-out infinite alternate; }
+  .prop:nth-child(2n) { animation-duration: 6.8s; animation-delay: -2s; }
+  .prop:nth-child(3n) { animation-duration: 4.9s; animation-delay: -1s; }
+}
 
 /* ── the sheet ── */
 .sheet { position: relative; z-index: 2; margin: 0 12px; padding-bottom: 12svh; border-radius: 44px; background: var(--paper); color: var(--ink); box-shadow: 0 -20px 60px rgba(8,50,120,.2); }
