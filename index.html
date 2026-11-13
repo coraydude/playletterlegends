@@ -2,41 +2,227 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Letter Legends</title>
-<meta name="description" content="Letter Legends is a word game of quick rounds, clever spelling and rival legends. Climb the level path, then battle friends turn by turn.">
-<style>
-  :root{--ink:#0b1030;--paper:#f7f4ff;--violet:#5b4bff;--pink:#eb68e0;--gold:#ffc63b;--muted:#5d5a7a}
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--ink);color:#fff;font-family:-apple-system,system-ui,"Segoe UI",Roboto,sans-serif;line-height:1.5}
-  main{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 24px;
-       background:radial-gradient(60% 40% at 50% 0%,rgba(91,75,255,.45),transparent 70%),radial-gradient(40% 30% at 85% 90%,rgba(235,104,224,.25),transparent 70%)}
-  h1{font-size:clamp(40px,9vw,88px);line-height:.95;margin:0 0 16px;letter-spacing:-.02em;text-wrap:balance}
-  h1 span{display:block;color:var(--gold)}
-  p.lead{max-width:34ch;margin:0 auto 32px;font-size:clamp(17px,2.6vw,21px);color:#d9d6ff;text-wrap:balance}
-  .stores{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-  a.btn{display:inline-block;padding:16px 26px;border-radius:14px;background:var(--violet);color:#fff;text-decoration:none;font-weight:600;font-size:17px}
-  a.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-  .soon{padding:16px 26px;border-radius:14px;border:1px solid rgba(255,255,255,.25);color:#d9d6ff;font-size:17px}
-  footer{padding:24px;text-align:center;font-size:14px;color:var(--muted)}
-  footer a{color:#b9b4ff;text-decoration:none;margin:0 10px}
-  @media (prefers-reduced-motion:no-preference){h1{animation:rise .7s ease-out both}p.lead,.stores{animation:rise .7s .12s ease-out both}}
-  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Letter Legends | The word game where every letter counts</title>
+<meta name="description" content="Letter Legends is a free word game of quick rounds, clever spelling and legendary rivals. Beat the four legends, battle friends turn by turn and collect tile themes. Coming soon to iPhone and Android.">
+<meta name="theme-color" content="#1792FC">
+<link rel="canonical" href="https://playletterlegends.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://playletterlegends.com/">
+<meta property="og:title" content="Letter Legends">
+<meta property="og:description" content="The word game where every letter counts. Coming soon to iPhone and Android.">
+<meta property="og:image" content="https://playletterlegends.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/app-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="preload" as="image" href="assets/logo.webp">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main>
-  <h1>Letter <span>Legends</span></h1>
-  <p class="lead">A word game of quick rounds, clever spelling and rival legends. Climb the level path, then battle friends turn by turn.</p>
-  <div class="stores">
-    <a class="btn" href="https://play.google.com/store/apps/details?id=com.glitchyard.letterlegends">Get it on Google Play</a>
-    <span class="soon">App Store: coming soon</span>
-  </div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar">
+  <a class="bar__icon" href="#top" aria-label="Letter Legends, back to top"><img src="assets/app-icon.png" alt="" width="44" height="44"></a>
+  <a class="bar__cta" href="#get">Get the game</a>
+</header>
+
+<main id="main">
+
+  <!-- HERO: the game's sky -->
+  <section class="hero" id="top" aria-labelledby="hero-h">
+    <div class="float" aria-hidden="true">
+      <img class="fl" data-d="-0.25" src="assets/tiles/dog-w.webp" alt="" style="--w:clamp(64px,8vw,120px); left:6%; top:18%; --r:-12deg">
+      <img class="fl" data-d="-0.4" src="assets/art/coin.webp" alt="" style="--w:clamp(40px,4.5vw,70px); left:17%; top:44%">
+      <img class="fl" data-d="-0.15" src="assets/tiles/monster-q.webp" alt="" style="--w:clamp(60px,7vw,110px); left:8%; top:66%; --r:9deg">
+      <img class="fl" data-d="-0.35" src="assets/tiles/koala-k.webp" alt="" style="--w:clamp(60px,7.5vw,116px); right:7%; top:16%; --r:10deg">
+      <img class="fl" data-d="-0.2" src="assets/art/gem.webp" alt="" style="--w:clamp(38px,4vw,62px); right:19%; top:40%">
+      <img class="fl" data-d="-0.45" src="assets/tiles/chick-z.webp" alt="" style="--w:clamp(58px,7vw,108px); right:6%; top:62%; --r:-8deg">
+    </div>
+    <div class="hero__in">
+      <h1 id="hero-h"><img class="hero__logo" src="assets/logo.webp" alt="Letter Legends" width="1200" height="585"></h1>
+      <p class="hero__tag">The word game where every letter counts.</p>
+      <div class="rack rack--hero" aria-label="P L A Y">
+        <img src="assets/tiles/default-p.webp" alt=""><img src="assets/tiles/default-l.webp" alt=""><img src="assets/tiles/default-a.webp" alt=""><img src="assets/tiles/default-y.webp" alt="">
+      </div>
+      <div class="stores" data-stores>
+        <a class="store" data-store="ios" aria-label="Download on the App Store"><img src="assets/app-store-badge.svg" alt="Download on the App Store" height="52"></a>
+        <a class="store" data-store="android" aria-label="Get it on Google Play"><img src="assets/google-play-badge.png" alt="Get it on Google Play" height="52"></a>
+        <p class="soon" data-soon>Coming soon to iPhone and Android</p>
+      </div>
+    </div>
+    <img class="hero__mascot" src="assets/art/mascot.webp" alt="" width="640" height="727" aria-hidden="true">
+  </section>
+
+  <!-- HOW IT PLAYS -->
+  <section class="sec sec--violet plays" aria-labelledby="plays-h">
+    <img class="clouds" src="assets/art/clouds.webp" alt="" aria-hidden="true" width="2200" height="372">
+    <div class="wrap">
+      <div class="rack rack--small" aria-hidden="true">
+        <img src="assets/tiles/default-s.webp" alt=""><img src="assets/tiles/default-p.webp" alt=""><img src="assets/tiles/default-e.webp" alt=""><img src="assets/tiles/default-l.webp" alt=""><img src="assets/tiles/default-l.webp" alt="">
+      </div>
+      <h2 class="h2" id="plays-h">Quick rounds.<br><span>Clever words.</span></h2>
+      <div class="steps">
+        <article class="step">
+          <img src="assets/tiles/cookie-o.webp" alt="" class="step__art">
+          <h3>Spell from your letters</h3>
+          <p>Make the best word you can from the tiles in your rack. Stuck? Swap your letters and try again.</p>
+        </article>
+        <article class="step">
+          <img src="assets/tiles/watermelon-x.webp" alt="" class="step__art">
+          <h3>Rare letters score big</h3>
+          <p>Every tile carries points. Land a Q, X or Z and watch your score jump.</p>
+        </article>
+        <article class="step">
+          <img src="assets/art/bolt.webp" alt="" class="step__art step__art--bolt">
+          <h3>Later rounds count more</h3>
+          <p>Five rounds a match, and the last three multiply your score up to ×4. Save your best word.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE LEGENDS -->
+  <section class="sec sec--deep legends" aria-labelledby="legends-h">
+    <img class="fl" data-d="0.18" src="assets/tiles/bunny-j.webp" alt="" aria-hidden="true" style="--w:clamp(56px,6vw,96px); left:4%; top:12%; --r:-10deg">
+    <img class="fl" data-d="0.3" src="assets/art/coin.webp" alt="" aria-hidden="true" style="--w:clamp(36px,3.6vw,58px); right:6%; top:18%">
+    <div class="wrap">
+      <p class="kicker">Your rivals</p>
+      <h2 class="h2" id="legends-h">Beat the <span>legends</span></h2>
+      <p class="lede">Climb the level path and face four legends. Bo warms you up. Lex is the boss.</p>
+      <div class="legends__row">
+        <figure class="legend"><img src="assets/art/legend-bo.webp" alt="Bo, a cheeky orange legend" width="360" height="360"><figcaption><b>Bo</b><span class="lvl lvl--1">Easy</span></figcaption></figure>
+        <figure class="legend"><img src="assets/art/legend-fen.webp" alt="Fen, a sly green legend" width="360" height="360"><figcaption><b>Fen</b><span class="lvl lvl--2">Medium</span></figcaption></figure>
+        <figure class="legend"><img src="assets/art/legend-vera.webp" alt="Vera, a bubbly pink legend" width="360" height="360"><figcaption><b>Vera</b><span class="lvl lvl--3">Hard</span></figcaption></figure>
+        <figure class="legend"><img src="assets/art/legend-lex.webp" alt="Lex, a fearless blue legend" width="360" height="360"><figcaption><b>Lex</b><span class="lvl lvl--4">Super hard</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENSHOTS: a slow moving strip (CSS only) -->
+  <section class="shots" aria-label="Screenshots">
+    <div class="shots__track">
+      <div class="shots__set">
+        <img src="assets/shots/words.webp" alt="Find the best words" width="560" height="1120">
+        <img src="assets/shots/friends.webp" alt="Challenge your friends" width="560" height="1120">
+        <img src="assets/shots/themes.webp" alt="Collect all tile themes" width="560" height="1120">
+        <img src="assets/shots/events.webp" alt="Weekly events, big rewards" width="560" height="1120">
+        <img src="assets/shots/minigames.webp" alt="Fun mini games" width="560" height="1120">
+        <img src="assets/shots/yours.webp" alt="Make it your own" width="560" height="1120">
+        <img src="assets/shots/season.webp" alt="Huge rewards every season" width="560" height="1120">
+      </div>
+      <div class="shots__set" aria-hidden="true">
+        <img src="assets/shots/words.webp" alt="" width="560" height="1120">
+        <img src="assets/shots/friends.webp" alt="" width="560" height="1120">
+        <img src="assets/shots/themes.webp" alt="" width="560" height="1120">
+        <img src="assets/shots/events.webp" alt="" width="560" height="1120">
+        <img src="assets/shots/minigames.webp" alt="" width="560" height="1120">
+        <img src="assets/shots/yours.webp" alt="" width="560" height="1120">
+        <img src="assets/shots/season.webp" alt="" width="560" height="1120">
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="sec sec--violet feats" aria-labelledby="feats-h">
+    <img class="fl" data-d="0.22" src="assets/tiles/fries-f.webp" alt="" aria-hidden="true" style="--w:clamp(56px,6vw,96px); right:5%; top:6%; --r:10deg">
+    <img class="fl" data-d="0.35" src="assets/art/gem.webp" alt="" aria-hidden="true" style="--w:clamp(34px,3.4vw,54px); left:5%; top:8%">
+    <div class="wrap">
+      <p class="kicker">So much to play</p>
+      <h2 class="h2" id="feats-h">There's always <span>one more game</span></h2>
+      <div class="bento">
+        <article class="card card--blue card--wide">
+          <div class="card__copy">
+            <h3>Battle your friends</h3>
+            <p>Challenge a friend or a player anywhere in the world, turn by turn. No timers: take your turn whenever it suits you.</p>
+          </div>
+          <img class="card__art card__art--hex" src="assets/art/hex-trio.webp" alt="" width="900" height="900">
+        </article>
+        <article class="card card--rasp">
+          <h3>Collect tile themes</h3>
+          <p>Fill albums of tile themes and play every word in your favourite.</p>
+          <div class="themes" aria-label="L E G E N D S on seven tile themes">
+            <img src="assets/tiles/cat-l.webp" alt=""><img src="assets/tiles/sushi-e.webp" alt=""><img src="assets/tiles/donut-g.webp" alt=""><img src="assets/tiles/penguin-e.webp" alt=""><img src="assets/tiles/panda-n.webp" alt=""><img src="assets/tiles/popsicle-d.webp" alt=""><img src="assets/tiles/strawberry-s.webp" alt="">
+          </div>
+        </article>
+        <article class="card card--amber">
+          <h3>Events every week</h3>
+          <p>A new event is always running, each with its own prizes.</p>
+          <div class="logos">
+            <img src="assets/art/logo-dig.webp" alt="Treasure Dig">
+            <img src="assets/art/logo-rally.webp" alt="Word Rally">
+            <img src="assets/art/logo-bounce.webp" alt="Bonus Bounce">
+          </div>
+        </article>
+        <article class="card card--teal">
+          <img class="card__badge" src="assets/art/logo-wotd.webp" alt="Word of the Day">
+          <h3>A new puzzle daily</h3>
+          <p>Unscramble the day's seven-letter word to win the chest.</p>
+        </article>
+        <article class="card card--deep">
+          <img class="card__trophy" src="assets/art/trophy.webp" alt="">
+          <h3>Weekly leagues</h3>
+          <p>Win matches, earn lightning bolts and climb the league table each week.</p>
+        </article>
+        <article class="card card--violet">
+          <img class="card__badge" src="assets/art/logo-pass.webp" alt="Letter Pass">
+          <h3>Rewards all season</h3>
+          <p>Play to unlock coins, gems, avatar frames and tile themes on the season pass.</p>
+        </article>
+        <article class="card card--blue card--wide">
+          <div class="card__copy">
+            <h3>Make it your own</h3>
+            <p>Avatar frames, chat packs and battle backgrounds. Style is for sale, power never is.</p>
+          </div>
+          <div class="frames" aria-hidden="true">
+            <img src="assets/art/frame-default.webp" alt=""><img src="assets/art/frame-hearts.webp" alt=""><img src="assets/art/frame-panda.webp" alt=""><img src="assets/art/frame-strawberry.webp" alt="">
+          </div>
+        </article>
+      </div>
+      <p class="langs">Play in 10 languages: English (US and UK), Spanish, French, German, Italian, Dutch, Swedish, Danish and Norwegian.</p>
+    </div>
+  </section>
+
+  <!-- GET THE GAME -->
+  <section class="get" id="get" aria-labelledby="get-h">
+    <img class="fl" data-d="0.25" src="assets/tiles/cheeseburger-r.webp" alt="" aria-hidden="true" style="--w:clamp(60px,7vw,110px); left:7%; top:16%; --r:-10deg">
+    <img class="fl" data-d="0.4" src="assets/tiles/pig-m.webp" alt="" aria-hidden="true" style="--w:clamp(56px,6.5vw,100px); right:8%; top:12%; --r:9deg">
+    <img class="fl" data-d="0.15" src="assets/art/coin.webp" alt="" aria-hidden="true" style="--w:clamp(36px,3.6vw,58px); right:20%; top:42%">
+    <div class="wrap">
+      <h2 class="h2" id="get-h">Ready to become<br><span>a legend?</span></h2>
+      <p class="lede">Letter Legends is free to play.</p>
+      <div class="stores" data-stores>
+        <a class="store" data-store="ios" aria-label="Download on the App Store"><img src="assets/app-store-badge.svg" alt="Download on the App Store" height="52"></a>
+        <a class="store" data-store="android" aria-label="Get it on Google Play"><img src="assets/google-play-badge.png" alt="Get it on Google Play" height="52"></a>
+        <p class="soon" data-soon>Coming soon to iPhone and Android</p>
+      </div>
+    </div>
+    <img class="crew" src="assets/art/crew.webp" alt="" width="1400" height="512" aria-hidden="true">
+  </section>
 </main>
-<footer>
-  <a href="https://glitchyard.studio">GlitchYard</a>
-  <a href="https://glitchyard.studio/privacy.html">Privacy</a>
-  <a href="https://glitchyard.studio/terms.html">Terms</a>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <div class="foot__brand">
+      <img src="assets/logo.webp" alt="Letter Legends" width="1200" height="585" loading="lazy">
+      <p>A game by <a href="https://glitchyard.co">GlitchYard</a>.</p>
+    </div>
+    <nav class="foot__links" aria-label="Help and legal">
+      <a href="https://glitchyard.co/support">Support</a>
+      <a href="https://glitchyard.co/privacy">Privacy</a>
+      <a href="https://glitchyard.co/terms">Terms</a>
+      <a href="https://glitchyard.co/ads-policy">Ads policy</a>
+      <a href="https://glitchyard.co/odds">Prize odds</a>
+      <a href="https://glitchyard.co/delete-account">Delete account</a>
+    </nav>
+  </div>
+  <p class="wrap foot__note">© 2026 GlitchYard · support@glitchyard.co<br>Letter Legends is free to play. Optional purchases include cosmetics, currency and Gold Tiles; Gold Tiles can also be earned by playing. Play is intended for ages 13 and up. GlitchYard is not affiliated with Apple or Google.</p>
 </footer>
+
+<script src="main.js" defer></script>
 </body>
 </html>
