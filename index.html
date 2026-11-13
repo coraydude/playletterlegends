@@ -55,26 +55,6 @@
     </div>
   </section>
 
-  <!-- SPOTLIGHT CARD + CHIPS -->
-  <section class="sky spot-wrap" aria-labelledby="spot-h">
-    <article class="spot" data-fx>
-      <div class="spot__copy">
-        <h2 id="spot-h">Four legends stand in your way</h2>
-        <p>Bo, Fen, Vera and Lex. Beat them all on the level path.</p>
-        <a class="pill pill--dark" href="#legends">Meet the legends</a>
-      </div>
-      <div class="ph ph--spot" data-label="Art: the four legends together"></div>
-    </article>
-    <div class="chips">
-      <p class="chips__title" data-fx>Inside the game</p>
-      <div class="chips__row">
-        <div class="chip" data-fx><span class="ph ph--chip"></span><span><b>10 languages</b><small>Play in yours</small></span></div>
-        <div class="chip" data-fx><span class="ph ph--chip"></span><span><b>Free to play</b><small>Style for sale, never power</small></span></div>
-        <div class="chip" data-fx><span class="ph ph--chip"></span><span><b>No timers</b><small>Battles at your pace</small></span></div>
-      </div>
-    </div>
-  </section>
-
   <!-- MISSION: the text holds still in the middle of the screen and lights up word by word, while
        coins, gems and tiles rise past it at their own speeds (parallax) -->
   <section class="sky mission" aria-label="About Letter Legends">
@@ -123,7 +103,7 @@
           <h2 data-fx>Spell. <em class="c-green">Score.</em> Repeat.</h2>
           <p data-fx>Make the best word you can from the letters in your rack. Rare letters score big, and the last three rounds multiply your points up to ×4.</p>
         </article>
-        <article class="row">
+        <article class="row" id="legends">
           <div class="row__art phone phone--iphone"><div class="phone__screen"><img src="assets/shots/screen-path.webp" alt="Home and the level path" width="620" height="1325" loading="lazy"></div></div>
           <h2 data-fx>Beat the <em class="c-blue">legends</em></h2>
           <p data-fx>Climb the level path and face Bo, Fen, Vera and Lex. Bo warms you up. Lex is the boss.</p>
@@ -179,17 +159,6 @@
     </div>
   </section>
 
-  <!-- THE LEGENDS: a fan of tilted cards -->
-  <section class="sky legends" id="legends" aria-labelledby="legends-h">
-    <h2 class="h2" id="legends-h" data-fx>The legends</h2>
-    <div class="fan">
-      <figure class="fan__card" style="--r:-9deg; --y:26px; --c:#FF8A3D"><div class="ph ph--legend" data-label="Bo"></div><figcaption><b>Bo</b><span>Easy</span></figcaption></figure>
-      <figure class="fan__card" style="--r:-3deg; --y:0px; --c:#2BC160"><div class="ph ph--legend" data-label="Fen"></div><figcaption><b>Fen</b><span>Medium</span></figcaption></figure>
-      <figure class="fan__card" style="--r:4deg; --y:6px; --c:#EB4F9B"><div class="ph ph--legend" data-label="Vera"></div><figcaption><b>Vera</b><span>Hard</span></figcaption></figure>
-      <figure class="fan__card" style="--r:10deg; --y:30px; --c:#2E6BFF"><div class="ph ph--legend" data-label="Lex"></div><figcaption><b>Lex</b><span>Super hard</span></figcaption></figure>
-    </div>
-  </section>
-
   <!-- CARD PACKS: one of each rarity, fanned; the fan opens as you scroll in -->
   <section class="sky packs" id="packs" aria-labelledby="packs-h">
     <h2 class="h2" id="packs-h" data-fx>Rip open <span>card packs</span></h2>
@@ -226,7 +195,8 @@
     <p class="foot__word" aria-hidden="true">Letter Legends</p>
   </div>
   <div class="foot__base">
-    <p>A game by <a href="https://glitchyard.co">GlitchYard</a> · support@glitchyard.co</p>
+    <a class="foot__studio" href="https://glitchyard.co" aria-label="A game by GlitchYard"><small>A game by</small><img src="assets/glitchyard-logo.webp" alt="GlitchYard" width="560" height="173" loading="lazy"></a>
+    <p>support@glitchyard.co</p>
     <p>© 2026 GlitchYard. Free to play. Optional purchases include cosmetics, currency and Gold Tiles, which can also be earned by playing. Ages 13 and up. Not affiliated with Apple or Google.</p>
   </div>
 </footer>
