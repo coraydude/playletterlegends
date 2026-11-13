@@ -163,6 +163,8 @@ if __name__ == '__main__':
     # ── scroll stories: card packs, Treasure Dig, Bonus Bounce (all game art) ──
     os.makedirs(os.path.join(OUT, 'story'), exist_ok=True)
     story = {
+        'pack-common': ('Store/Resources/StoreV2/pack-common.png', 440),
+        'pack-rare': ('Store/Resources/StoreV2/pack-rare.png', 440),
         'pack-epic': ('Store/Resources/StoreV2/pack-epic.png', 440),
         'card-back': ('Cards/Resources/Cards/card-back-common.png', 280),
         'card-front-common': ('Cards/Resources/Cards/card-front-common.png', 280),
