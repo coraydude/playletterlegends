@@ -163,7 +163,7 @@ h1, h2, h3, p, figure, ol { margin: 0; }
 .post p { margin: 8px 6px 0; font-size: 16px; opacity: .9; }
 
 /* ── legends fan ── */
-.legends { text-align: center; background: var(--sky-deep); padding-top: 0; }
+.legends { text-align: center; background: var(--sky); padding-top: 0; }
 .fan { display: flex; justify-content: center; margin: clamp(40px, 5vw, 70px) auto clamp(40px, 5vw, 60px); }
 .fan__card { width: clamp(150px, 19vw, 240px); margin: 0 clamp(-26px, -1.6vw, -10px); padding: 12px 12px 20px; border-radius: 28px; rotate: var(--r); translate: 0 var(--y); transition: rotate .3s cubic-bezier(.3,1.5,.5,1), translate .3s cubic-bezier(.3,1.5,.5,1), scale .3s cubic-bezier(.3,1.5,.5,1); }
 .fan__card:hover { rotate: 0deg; translate: 0 -14px; scale: 1.05; z-index: 2; }
@@ -173,7 +173,7 @@ h1, h2, h3, p, figure, ol { margin: 0; }
 .fan__card span { font: 900 12px/1 var(--body); text-transform: uppercase; letter-spacing: .08em; opacity: .85; }
 
 /* ── card packs fan ── */
-.packs { background: var(--sky-deep); text-align: center; padding-top: clamp(40px, 6vw, 90px); overflow: hidden; }
+.packs { background: var(--sky); text-align: center; padding-top: clamp(40px, 6vw, 90px); overflow: hidden; }
 .fan3 { --open: 0; --pk: clamp(150px, 17vw, 240px); position: relative; height: calc(var(--pk) * 1.95); margin-top: clamp(40px, 5vw, 70px); }
 .pack { position: absolute; left: 50%; bottom: 0; width: var(--pk); margin-left: calc(var(--pk) / -2); transform-origin: 50% 120%;
   /* --open 0..1 comes from the scroll (main.js): closed stack -> spread fan */
@@ -204,7 +204,7 @@ h1, h2, h3, p, figure, ol { margin: 0; }
 .foot__art { position: relative; margin-top: clamp(40px, 5vw, 70px); height: clamp(260px, 30vw, 460px); }
 .ph--burst { position: absolute; inset: 0 var(--gut) 30%; border-radius: 30px 30px 0 0; }
 .foot__word { position: absolute; left: 0; right: 0; bottom: -.12em; font: 400 calc((100vw - var(--rail)) * .138)/.8 var(--head); text-transform: uppercase; color: #fff; white-space: nowrap; text-shadow: 0 .05em 0 rgba(10,70,170,.35); }
-.foot__base { position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding: 18px var(--gut); background: var(--sky-deep); font-size: 13px; text-align: left; }
+.foot__base { position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding: 18px var(--gut); background: var(--sky); box-shadow: inset 0 1px 0 rgba(255,255,255,.18); font-size: 13px; text-align: left; }
 .foot__base p { opacity: .85; }
 .foot__base p:last-child { max-width: 52em; }
 
