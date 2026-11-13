@@ -47,7 +47,7 @@
   }
 
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduced) { document.querySelector('.fab').classList.add('is-on'); words.forEach((w) => w.classList.add('is-lit')); document.querySelectorAll('.tl__item').forEach((i) => i.classList.add('is-on')); document.querySelector('.tl')?.style.setProperty('--fill', 1); return; }
+  if (reduced) { document.querySelector('.fab').classList.add('is-on'); words.forEach((w) => w.classList.add('is-lit')); document.querySelector('.fan3')?.style.setProperty('--open', 1); return; }
   document.documentElement.classList.add('js');
 
   // ── Arrival fade: from below while scrolling down, from above while scrolling up ────────────────
@@ -73,7 +73,7 @@
   const io3 = (t) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
   const floats = [...document.querySelectorAll('[data-d]')].map((el) => ({ el, d: parseFloat(el.dataset.d), sec: el.closest('section') }));
   const cards = [...document.querySelectorAll('.stack__card')], rows = [...document.querySelectorAll('.row')];
-  const tl = document.querySelector('.tl'), items = [...document.querySelectorAll('.tl__item')];
+  const fan3 = document.querySelector('.fan3');
   const fab = document.querySelector('.fab');
   let raf = 0, litN = -1;
   const frame = () => {
@@ -104,13 +104,10 @@
         c.style.filter = next ? `brightness(${(1 - next * 0.12).toFixed(3)})` : '';
       });
     }
-    // rounds: the line fills to the middle of the screen; every round it has reached lights up
-    if (tl) {
-      const r = tl.getBoundingClientRect();
-      if (r.bottom > -VH && r.top < VH * 2) {
-        tl.style.setProperty('--fill', cl((VH * 0.6 - r.top) / r.height).toFixed(4));
-        items.forEach((it) => { const b = it.getBoundingClientRect(); it.classList.toggle('is-on', b.top + b.height / 2 < VH * 0.62); });
-      }
+    // card packs: the fan spreads as the section comes up the screen (closed stack -> open fan)
+    if (fan3) {
+      const r = fan3.getBoundingClientRect();
+      if (r.bottom > -200 && r.top < VH + 200) fan3.style.setProperty('--open', io3(cl((VH * 0.95 - r.top) / (VH * 0.55))).toFixed(4));
     }
   };
   addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(frame); }, { passive: true });
