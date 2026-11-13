@@ -101,22 +101,6 @@ h1, h2, h3, p, figure, ol { margin: 0; }
 @keyframes rise-big { from { opacity: 0; translate: 0 160px; } }
 @keyframes bob { from { translate: 0 -8px; } to { translate: 0 10px; } }
 
-/* ── spotlight + chips ── */
-.spot-wrap { padding-top: clamp(40px, 5vw, 70px); }
-.spot { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1.3fr; align-items: center; gap: clamp(20px, 3vw, 40px); padding: clamp(26px, 3.6vw, 48px);
-  border-radius: 40px; color: var(--logo-deep); }
-.spot h2 { font: 400 clamp(30px, 3.2vw, 46px)/1 var(--head); text-transform: uppercase; color: var(--logo-blue); text-shadow: 0 2px 0 rgba(255,255,255,.55), 0 4px 10px rgba(39,72,141,.25); }
-.spot p { margin: 14px 0 24px; font-size: 17px; font-weight: 800; }
-.ph--spot { aspect-ratio: 16 / 9; border-radius: 28px; }
-.ph--spot::after { background: var(--logo-blue) !important; }
-.chips { max-width: var(--max); margin: clamp(60px, 7vw, 100px) auto 0; text-align: center; }
-.chips__title { font: 900 14px/1 var(--body); text-transform: uppercase; letter-spacing: .1em; opacity: .85; }
-.chips__row { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 18px; }
-.chip { display: flex; align-items: center; gap: 14px; padding: 14px 24px 18px 14px; border-radius: 22px; text-align: left; }
-.chip b { display: block; font-weight: 900; font-size: 16px; line-height: 1.2; }
-.chip small { display: block; font-size: 13px; opacity: .8; }
-.ph--chip { width: 44px; height: 44px; border-radius: 12px; }
-
 /* ── mission: pinned text, props rising past it ── */
 .mission { height: 260svh; padding: 0; }
 .mission__stage { position: sticky; z-index: 2; top: var(--tick); height: calc(100svh - var(--tick)); display: grid; place-items: center; padding: 0 var(--gut); text-align: center; }
@@ -162,16 +146,6 @@ h1, h2, h3, p, figure, ol { margin: 0; }
 .post h3 { margin: 0 6px; font: 400 28px/1.05 var(--head); text-transform: uppercase; }
 .post p { margin: 8px 6px 0; font-size: 16px; opacity: .9; }
 
-/* ── legends fan ── */
-.legends { text-align: center; background: var(--sky); padding-top: 0; }
-.fan { display: flex; justify-content: center; margin: clamp(40px, 5vw, 70px) auto clamp(40px, 5vw, 60px); }
-.fan__card { width: clamp(150px, 19vw, 240px); margin: 0 clamp(-26px, -1.6vw, -10px); padding: 12px 12px 20px; border-radius: 28px; rotate: var(--r); translate: 0 var(--y); transition: rotate .3s cubic-bezier(.3,1.5,.5,1), translate .3s cubic-bezier(.3,1.5,.5,1), scale .3s cubic-bezier(.3,1.5,.5,1); }
-.fan__card:hover { rotate: 0deg; translate: 0 -14px; scale: 1.05; z-index: 2; }
-.ph--legend { aspect-ratio: 4 / 5; border-radius: 16px; }
-.fan__card figcaption { margin-top: 12px; }
-.fan__card b { display: block; font: 400 30px/1 var(--head); text-transform: uppercase; }
-.fan__card span { font: 900 12px/1 var(--body); text-transform: uppercase; letter-spacing: .08em; opacity: .85; }
-
 /* ── card packs fan ── */
 .packs { background: var(--sky); text-align: center; padding-top: clamp(40px, 6vw, 90px); overflow: hidden; }
 .fan3 { --open: 0; --pk: clamp(150px, 17vw, 240px); position: relative; height: calc(var(--pk) * 1.95); margin-top: clamp(40px, 5vw, 70px); }
@@ -207,8 +181,13 @@ h1, h2, h3, p, figure, ol { margin: 0; }
   display: flex; flex-direction: column; align-items: center; }
 .foot__crew { position: relative; z-index: 2; width: var(--cw); margin-bottom: calc(-1 * (var(--fw) * .051 + var(--cw) * .0278)); filter: drop-shadow(0 10px 14px rgba(10,50,130,.3)); }
 .foot__word { position: relative; z-index: 1; width: 100%; margin-bottom: -.12em; font: 400 var(--fw)/.8 var(--head); text-transform: uppercase; color: #fff; white-space: nowrap; text-shadow: 0 .05em 0 rgba(10,70,170,.35); }
-.foot__base { position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding: 18px calc(var(--gut) + 76px) 18px var(--gut); background: var(--sky); /* right padding clears the back-to-top button */ box-shadow: inset 0 1px 0 rgba(255,255,255,.18); font-size: 13px; text-align: left; }
-.foot__base p { opacity: .85; }
+.foot__base { position: relative; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 28px; padding: 22px calc(var(--gut) + 76px) 22px var(--gut);
+  background: #2F1380; /* glitchyard.co's footer */ font-size: 13px; text-align: left; } /* right padding clears the back-to-top button */
+.foot__base p { opacity: .8; }
+.foot__studio { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; transition: transform .2s cubic-bezier(.3,1.6,.5,1); }
+.foot__studio:hover { transform: translateY(-2px); }
+.foot__studio small { font: 900 12px/1 var(--body); text-transform: uppercase; letter-spacing: .1em; opacity: .7; }
+.foot__studio img { height: 40px; width: auto; }
 .foot__base p:last-child { max-width: 52em; }
 
 /* ── floating back-to-top ── */
@@ -223,7 +202,6 @@ h1, h2, h3, p, figure, ol { margin: 0; }
 
 /* ── responsive ── */
 @media (max-width: 960px) {
-  .spot { grid-template-columns: 1fr; }
   .more__grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 760px) {
@@ -244,8 +222,6 @@ h1, h2, h3, p, figure, ol { margin: 0; }
   .row__art { display: block; }
   .row { align-items: center; text-align: center; }
   .more__grid { grid-template-columns: 1fr; }
-  .fan { flex-wrap: wrap; gap: 18px 0; }
-  .fan__card { width: 44%; margin: 0 -6px; }
   .foot__base { flex-direction: column; }
   .fan3 { --pk: 24vw; } /* all three packs fit across a phone, fully open */
   .tag { font-size: 13px; padding: 5px 11px 8px; bottom: -10px; }
@@ -257,7 +233,7 @@ h1, h2, h3, p, figure, ol { margin: 0; }
    inside the top edge, a chunky darker LIP across the bottom, a thin dark edge under the lip, a soft
    drop. Buttons wear the game's thick white ring. Every piece is painted from five vars:
    --top/--body (face), --lip, --edge, --ring. */
-.pill, .spot, .chip, .post, .fan__card, .rail__menu, .fab {
+.pill, .post, .rail__menu, .fab {
   background: linear-gradient(180deg, var(--top) 0%, var(--top) var(--split, 0%), var(--body) var(--split2, 100%));
   box-shadow:
     inset 0 2px 0 var(--shine, rgba(255,255,255,.6)),
@@ -275,13 +251,7 @@ h1, h2, h3, p, figure, ol { margin: 0; }
 .rail__menu  { --top: #53BFF9; --body: #2183DE; --lip: #1553C5; --edge: #073385; --lipH: 4px; border-radius: 12px; }
 .fab         { --top: #FCD766; --split: 46%; --split2: 54%; --body: #F5B73D; --lip: #C8782A; --edge: rgba(90,40,8,.5); --ring: 0 0 0 4px #fff; --ringW: 4px; }
 /* panels: the gold house body (= the logo's gold) and the white/blue store card */
-.spot { --top: #FCD766; --split: 0%; --body: #F7C24A; --lip: #C8782A; --lipH: 12px; --edge: #8E4E16; --edgeH: 4px; }
-.chip, .post { --top: #E6EFFC; --body: #DCE8F8; --lip: #BED2EE; --lipH: 7px; --edge: #8FAAD4; color: var(--ink); }
-.chip small, .post p, .post small { color: #3A4A6B; opacity: 1; }
+.post { --top: #E6EFFC; --body: #DCE8F8; --lip: #BED2EE; --lipH: 7px; --edge: #8FAAD4; color: var(--ink); }
+.post p, .post small { color: #3A4A6B; opacity: 1; }
 .post h3 { color: var(--logo-deep); }
-.fan__card { --top: color-mix(in srgb, var(--c) 82%, #fff); --body: var(--c); --lip: color-mix(in srgb, var(--c) 72%, #000); --lipH: 9px; --edge: color-mix(in srgb, var(--c) 45%, #000); }
-/* the picture well in the gold card: a cream plate set INTO it (td-pill-cream colours, lip on top = recessed) */
-.ph--spot { background: repeating-linear-gradient(135deg, rgba(200,120,42,.08) 0 16px, transparent 16px 32px), #FCF0D3;
-  box-shadow: inset 0 6px 0 #E3BA92, inset 0 8px 10px -2px rgba(117,52,23,.25), 0 2px 0 rgba(255,255,255,.55); }
-.ph--chip { background: linear-gradient(180deg, #FCD766 0 46%, #F5B73D 54%); border-radius: 14px; box-shadow: inset 0 -4px 0 #C8782A, inset 0 2px 0 rgba(255,255,255,.6); }
-.ph--post, .ph--legend { box-shadow: inset 0 5px 0 rgba(0,0,0,.14), inset 0 12px 18px -10px rgba(0,0,0,.25); }
+.ph--post { box-shadow: inset 0 5px 0 rgba(0,0,0,.14), inset 0 12px 18px -10px rgba(0,0,0,.25); }
