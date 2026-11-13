@@ -51,6 +51,22 @@
   addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden) { setMenu(false); btn.focus(); } });
   addEventListener('click', (e) => { if (!menu.hidden && !menu.contains(e.target) && !btn.contains(e.target)) setMenu(false); });
 
+  // ── Phone top bar: it never sits on top of the logo. It slides away the moment you scroll down, and
+  // comes back on a scroll up only once the logo and tagline are fully behind you (at the very top it is
+  // simply there, in its own slot above the hero). Open menu or keyboard focus keeps it shown. ────────
+  const rail = document.querySelector('.rail'), heroTag = document.querySelector('.hero__tag'), phoneMq = matchMedia('(max-width: 760px)');
+  let barY = scrollY;
+  const bar = () => {
+    const y = scrollY, d = y - barY;
+    if (!phoneMq.matches || y < 8 || !menu.hidden || rail.contains(document.activeElement)) { rail.classList.remove('is-hidden'); barY = y; }
+    else if (Math.abs(d) > 6) { rail.classList.toggle('is-hidden', d > 0 || (heroTag && heroTag.getBoundingClientRect().bottom > 0)); barY = y; }
+    rail.classList.toggle('is-over', phoneMq.matches && y >= 8);
+  };
+  addEventListener('scroll', bar, { passive: true });
+  phoneMq.addEventListener('change', bar);
+  rail.addEventListener('focusin', () => rail.classList.remove('is-hidden'));
+  bar();
+
   // ── Mission words: split once so each word can light up ─────────────────────────────────────────
   const mission = document.querySelector('[data-words]');
   const words = [];
