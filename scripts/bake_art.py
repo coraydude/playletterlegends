@@ -160,6 +160,49 @@ if __name__ == '__main__':
         im = Image.open(os.path.join(GAME, f'Screenshots/devices/iphone-16-pro/{cap}.png')).convert('RGB')
         im = im.resize((660, round(im.height * 660 / im.width)), Image.LANCZOS)
         im.save(os.path.join(OUT, 'shots', f'ui-{name}.webp'), quality=86, method=6)
+    # ── scroll stories: card packs, Treasure Dig, Bonus Bounce (all game art) ──
+    os.makedirs(os.path.join(OUT, 'story'), exist_ok=True)
+    story = {
+        'pack-epic': ('Store/Resources/StoreV2/pack-epic.png', 440),
+        'card-back': ('Cards/Resources/Cards/card-back-common.png', 280),
+        'card-front-common': ('Cards/Resources/Cards/card-front-common.png', 280),
+        'card-front-rare': ('Cards/Resources/Cards/card-front-rare.png', 280),
+        'card-front-epic': ('Cards/Resources/Cards/card-front-epic.png', 280),
+        'undug': ('TreasureDig/Resources/TreasureDig/td-undug.png', 190),
+        'dug': ('TreasureDig/Resources/TreasureDig/td-dug.png', 190),
+        'td-coin': ('TreasureDig/Resources/TreasureDig/td-coin.png', 120),
+        'td-gem': ('TreasureDig/Resources/TreasureDig/td-gem.png', 120),
+        'pickaxe': ('TreasureDig/Resources/TreasureDig/td-pickaxe.png', 300),
+        'chest-closed': ('TreasureDig/Resources/TreasureDig/td-chest-purple-closed.png', 380),
+        'chest-open': ('TreasureDig/Resources/TreasureDig/td-chest-purple-open.png', 380),
+        'pd-board': ('PegDrop/Resources/PegDrop/pd-board.png', 760),
+        'bumper': ('PegDrop/Resources/PegDrop/pd-multiplier-peg.png', 170),
+        'ball': ('PegDrop/Resources/PegDrop/pd-ball-orb.png', 96),
+        'cup-coin': ('PegDrop/Resources/PegDrop/pd-cup-coin.png', 120),
+        'cup-tile': ('PegDrop/Resources/PegDrop/pd-cup-tile.png', 120),
+        'cup-pack': ('PegDrop/Resources/PegDrop/pd-cup-pack-common.png', 120),
+    }
+    for name, (src, w) in story.items():
+        fit(src, f'story/{name}.webp', w)
+    # the part cards wear the tile's own art (no letter), as the game's card faces do
+    dog_art, *_ = skin_art('dog')
+    fit(dog_art.filename, 'story/dog-art.webp', 300)
+    bake_tile('dog', 'W', width=560)
+    os.replace(os.path.join(OUT, 'tiles', 'dog-w.webp'), os.path.join(OUT, 'story', 'dog-w-big.webp'))
+    bake_tile('dog', 'W')
+    # the dig board: td-bg cropped around the 5 x 6 grid (TreasureDigModal stage units; the art spans the
+    # stage's full height, board centred). Crop window in stage units: x -60..1140, y 880..2210.
+    bg = Image.open(os.path.join(UI, 'TreasureDig/Resources/TreasureDig/td-bg.png')).convert('RGB')
+    k = bg.height / 2401.43; x0 = (bg.width / k - 1080) / 2
+    bg = bg.crop((round((x0 - 60) * k), round(880 * k), round((x0 + 1140) * k), round(2210 * k))).resize((1000, 1108), Image.LANCZOS)
+    bg.save(os.path.join(OUT, 'story', 'dig-board.webp'), quality=84, method=6)
+    # a real Bonus Bounce drop on the game's cabinet geometry + physics
+    import bounce_sim
+    s = bounce_sim.best()
+    _, tube, frames, hits, cup, _t = s
+    json.dump({'board': [1155, 2156], 'win': [bounce_sim.WCX, bounce_sim.WCY], 'ball': bounce_sim.BALL_R * 2,
+               'cup': cup, 'cups': bounce_sim.CUP_CX, 'pegs': bounce_sim.PEGS, 'frames': frames, 'hits': hits},
+              open(os.path.join(OUT, 'story', 'bounce.json'), 'w'), separators=(',', ':'))
     # link-preview card: the game's sky, the logo, the crew resting on the bottom edge
     og = Image.new('RGBA', (1200, 630))
     top, bot = (0x17, 0x92, 0xFC), (0x9A, 0xB6, 0xF9)

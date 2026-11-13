@@ -107,6 +107,88 @@
     </div>
   </section>
 
+  <!-- SCROLL STORIES: each one plays only while you scroll (progress = scroll position) -->
+  <section class="story story--packs" data-story="packs" aria-labelledby="packs-h">
+    <div class="story__stage">
+      <div class="story__copy">
+        <p class="kicker">Card packs</p>
+        <h2 class="h2" id="packs-h">Rip it open.<br><span>Unlock a tile.</span></h2>
+        <ol class="beats">
+          <li>Rip open a card pack</li>
+          <li>Every pack deals four cards for one tile</li>
+          <li>Each card fills one of the tile's four parts</li>
+          <li>Fill all four parts and the tile is yours</li>
+        </ol>
+      </div>
+      <div class="story__box">
+        <div class="story__vis pk" role="img" aria-label="A card pack rips open, deals the dog tile's four part cards (Paw, Fur, Tail and Ear), their progress bars fill, and the dog tile unlocks">
+          <div class="pk-glow"></div>
+          <div class="pk-pack">
+            <img class="pk-body" src="assets/story/pack-epic.webp" alt="" width="440" height="696">
+            <img class="pk-top" src="assets/story/pack-epic.webp" alt="" width="440" height="696">
+          </div>
+          <div class="pk-flash"></div>
+          <div class="pk-parts"></div>
+          <div class="pk-unlock">
+            <div class="pk-rays"></div>
+            <img class="pk-tile" src="assets/story/dog-w-big.webp" alt="" width="560" height="560">
+            <p class="pk-label">Dog tile unlocked!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="story story--dig story--flip" data-story="dig" aria-labelledby="dig-h">
+    <div class="story__stage">
+      <div class="story__copy">
+        <img class="story__logo" src="assets/art/logo-dig.webp" alt="Treasure Dig" width="520" height="342">
+        <h2 class="h2" id="dig-h">Dig deep.<br><span>Find treasure.</span></h2>
+        <ol class="beats">
+          <li>Play matches to earn shovels</li>
+          <li>Dig the board to uncover coins and gems</li>
+          <li>Clear the board to open the chest</li>
+        </ol>
+      </div>
+      <div class="story__box">
+        <div class="story__vis dg" role="img" aria-label="A pickaxe digs through the Treasure Dig board, uncovering coins and gems, then the treasure chest bursts open">
+          <img class="dg-board" src="assets/story/dig-board.webp" alt="" width="1000" height="1108">
+          <div class="dg-grid"></div>
+          <div class="dg-dim"></div>
+          <img class="dg-pick" src="assets/story/pickaxe.webp" alt="" width="300" height="301">
+          <div class="dg-chest">
+            <img class="dg-closed" src="assets/story/chest-closed.webp" alt="" width="380" height="309">
+            <img class="dg-open" src="assets/story/chest-open.webp" alt="" width="380" height="394">
+          </div>
+          <div class="dg-burst"></div>
+          <p class="dg-label">Board cleared!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="story story--bounce" data-story="bounce" aria-labelledby="bounce-h">
+    <div class="story__stage">
+      <div class="story__copy">
+        <img class="story__logo" src="assets/art/logo-bounce.webp" alt="Bonus Bounce" width="520" height="247">
+        <h2 class="h2" id="bounce-h">Drop it.<br><span>Watch it bounce.</span></h2>
+        <ol class="beats">
+          <li>Win matches to earn balls</li>
+          <li>Drop a ball through the pegs</li>
+          <li>Land in a cup: coins, card packs or the Gold Tile jackpot</li>
+        </ol>
+      </div>
+      <div class="story__box">
+        <div class="story__vis bb" role="img" aria-label="A ball drops through the Bonus Bounce pegs, bounces off the bumpers and lands in the 600 coin cup">
+          <img class="bb-board" src="assets/story/pd-board.webp" alt="" width="760" height="1419">
+          <div class="bb-field"></div>
+          <div class="bb-burst"></div>
+          <p class="bb-label">+600 coins!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FEATURES -->
   <section class="sec sec--violet feats" aria-labelledby="feats-h">
     <img class="fl" data-d="0.22" src="assets/tiles/popcorn-f.webp" alt="" aria-hidden="true" style="--w:clamp(56px,6vw,96px); right:5%; top:6%; --r:10deg">
@@ -130,13 +212,9 @@
           </div>
         </article>
         <article class="card card--amber">
-          <h3>Events every week</h3>
-          <p>A new event is always running, each with its own prizes.</p>
-          <div class="logos">
-            <img src="assets/art/logo-dig.webp" alt="Treasure Dig">
-            <img src="assets/art/logo-rally.webp" alt="Word Rally">
-            <img src="assets/art/logo-bounce.webp" alt="Bonus Bounce">
-          </div>
+          <img class="card__badge card__badge--rally" src="assets/art/logo-rally.webp" alt="Word Rally">
+          <h3>Race in Word Rally</h3>
+          <p>Roll the dice, race three other players over three days and win the championship on points.</p>
         </article>
         <article class="card card--teal">
           <img class="card__badge" src="assets/art/logo-wotd.webp" alt="Word of the Day">
@@ -204,5 +282,6 @@
 </footer>
 
 <script src="main.js" defer></script>
+<script src="story.js" defer></script>
 </body>
 </html>
