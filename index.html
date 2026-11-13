@@ -23,9 +23,31 @@
 <link rel="preload" as="image" href="assets/logo.webp">
 <link rel="preload" as="font" type="font/woff" href="assets/fonts/Ringold-Soft.woff" crossorigin>
 <link rel="stylesheet" href="style.css">
+<script>
+  // The intro plays on a fresh visit to the top of the page. Set before first paint so the hero is
+  // already hidden behind the intro's sky; intro.js always clears it (and a 6 s failsafe here does too).
+  (function () {
+    var d = document.documentElement;
+    if (location.hash || !window.matchMedia || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    d.classList.add('is-intro');
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    setTimeout(function () { d.classList.remove('is-intro'); }, 6000);
+  })();
+</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+
+<!-- intro: the logo slams onto the sky, then rises into the hero (intro.js) -->
+<div class="intro" aria-hidden="true">
+  <div class="intro__bg"></div>
+  <div class="intro__shake">
+    <div class="intro__ring"></div>
+    <div class="intro__shadow"></div>
+    <div class="intro__bits"></div>
+    <img class="intro__logo" src="assets/logo.webp" alt="" width="1200" height="585">
+  </div>
+</div>
 
 <!-- left rail: menu + the vertical wordmark -->
 <aside class="rail">
@@ -216,5 +238,6 @@
 <a class="fab ph" href="#top" aria-label="Back to top"></a>
 
 <script src="main.js" defer></script>
+<script src="intro.js" defer></script>
 </body>
 </html>
