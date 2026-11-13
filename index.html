@@ -19,8 +19,9 @@
 <link rel="apple-touch-icon" href="assets/app-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap">
 <link rel="preload" as="image" href="assets/logo.webp">
+<link rel="preload" as="font" type="font/woff" href="assets/fonts/Ringold-Soft.woff" crossorigin>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -38,10 +39,10 @@
     <div class="float" aria-hidden="true">
       <img class="fl" data-d="-0.25" src="assets/tiles/dog-w.webp" alt="" style="--w:clamp(64px,8vw,120px); left:6%; top:18%; --r:-12deg">
       <img class="fl" data-d="-0.4" src="assets/art/coin.webp" alt="" style="--w:clamp(40px,4.5vw,70px); left:17%; top:44%">
-      <img class="fl" data-d="-0.15" src="assets/tiles/monster-q.webp" alt="" style="--w:clamp(60px,7vw,110px); left:8%; top:66%; --r:9deg">
-      <img class="fl" data-d="-0.35" src="assets/tiles/koala-k.webp" alt="" style="--w:clamp(60px,7.5vw,116px); right:7%; top:16%; --r:10deg">
+      <img class="fl" data-d="-0.15" src="assets/tiles/gummybear-q.webp" alt="" style="--w:clamp(60px,7vw,110px); left:8%; top:66%; --r:9deg">
+      <img class="fl" data-d="-0.35" src="assets/tiles/fox-k.webp" alt="" style="--w:clamp(60px,7.5vw,116px); right:7%; top:16%; --r:10deg">
       <img class="fl" data-d="-0.2" src="assets/art/gem.webp" alt="" style="--w:clamp(38px,4vw,62px); right:19%; top:40%">
-      <img class="fl" data-d="-0.45" src="assets/tiles/chick-z.webp" alt="" style="--w:clamp(58px,7vw,108px); right:6%; top:62%; --r:-8deg">
+      <img class="fl" data-d="-0.45" src="assets/tiles/rubberduck-z.webp" alt="" style="--w:clamp(58px,7vw,108px); right:6%; top:62%; --r:-8deg">
     </div>
     <div class="hero__in">
       <h1 id="hero-h"><img class="hero__logo" src="assets/logo.webp" alt="Letter Legends" width="1200" height="585"></h1>
@@ -55,12 +56,15 @@
         <p class="soon" data-soon>Coming soon to iPhone and Android</p>
       </div>
     </div>
-    <img class="hero__mascot" src="assets/art/mascot.webp" alt="" width="640" height="727" aria-hidden="true">
+    <!-- two real in-game screens in perspective: the VS intro on Android, the board on iPhone 17 -->
+    <div class="duo" role="img" aria-label="Letter Legends on Android and iPhone: the versus screen and the game board">
+      <div class="phone phone--android"><div class="phone__screen"><img src="assets/shots/ui-vs.webp" alt="" width="660" height="1435"></div></div>
+      <div class="phone phone--iphone"><div class="phone__screen"><img src="assets/shots/ui-board.webp" alt="" width="660" height="1435"></div></div>
+    </div>
   </section>
 
   <!-- HOW IT PLAYS -->
   <section class="sec sec--violet plays" aria-labelledby="plays-h">
-    <img class="clouds" src="assets/art/clouds.webp" alt="" aria-hidden="true" width="2200" height="372">
     <div class="wrap">
       <div class="rack rack--small" aria-hidden="true">
         <img src="assets/tiles/default-s.webp" alt=""><img src="assets/tiles/default-p.webp" alt=""><img src="assets/tiles/default-e.webp" alt=""><img src="assets/tiles/default-l.webp" alt=""><img src="assets/tiles/default-l.webp" alt="">
@@ -68,12 +72,12 @@
       <h2 class="h2" id="plays-h">Quick rounds.<br><span>Clever words.</span></h2>
       <div class="steps">
         <article class="step">
-          <img src="assets/tiles/cookie-o.webp" alt="" class="step__art">
+          <img src="assets/tiles/donut-o.webp" alt="" class="step__art">
           <h3>Spell from your letters</h3>
           <p>Make the best word you can from the tiles in your rack. Stuck? Swap your letters and try again.</p>
         </article>
         <article class="step">
-          <img src="assets/tiles/watermelon-x.webp" alt="" class="step__art">
+          <img src="assets/tiles/boxingglove-x.webp" alt="" class="step__art">
           <h3>Rare letters score big</h3>
           <p>Every tile carries points. Land a Q, X or Z and watch your score jump.</p>
         </article>
@@ -88,7 +92,7 @@
 
   <!-- THE LEGENDS -->
   <section class="sec sec--deep legends" aria-labelledby="legends-h">
-    <img class="fl" data-d="0.18" src="assets/tiles/bunny-j.webp" alt="" aria-hidden="true" style="--w:clamp(56px,6vw,96px); left:4%; top:12%; --r:-10deg">
+    <img class="fl" data-d="0.18" src="assets/tiles/sheep-j.webp" alt="" aria-hidden="true" style="--w:clamp(56px,6vw,96px); left:4%; top:12%; --r:-10deg">
     <img class="fl" data-d="0.3" src="assets/art/coin.webp" alt="" aria-hidden="true" style="--w:clamp(36px,3.6vw,58px); right:6%; top:18%">
     <div class="wrap">
       <p class="kicker">Your rivals</p>
@@ -129,7 +133,7 @@
 
   <!-- FEATURES -->
   <section class="sec sec--violet feats" aria-labelledby="feats-h">
-    <img class="fl" data-d="0.22" src="assets/tiles/fries-f.webp" alt="" aria-hidden="true" style="--w:clamp(56px,6vw,96px); right:5%; top:6%; --r:10deg">
+    <img class="fl" data-d="0.22" src="assets/tiles/popcorn-f.webp" alt="" aria-hidden="true" style="--w:clamp(56px,6vw,96px); right:5%; top:6%; --r:10deg">
     <img class="fl" data-d="0.35" src="assets/art/gem.webp" alt="" aria-hidden="true" style="--w:clamp(34px,3.4vw,54px); left:5%; top:8%">
     <div class="wrap">
       <p class="kicker">So much to play</p>
@@ -146,7 +150,7 @@
           <h3>Collect tile themes</h3>
           <p>Fill albums of tile themes and play every word in your favourite.</p>
           <div class="themes" aria-label="L E G E N D S on seven tile themes">
-            <img src="assets/tiles/cat-l.webp" alt=""><img src="assets/tiles/sushi-e.webp" alt=""><img src="assets/tiles/donut-g.webp" alt=""><img src="assets/tiles/penguin-e.webp" alt=""><img src="assets/tiles/panda-n.webp" alt=""><img src="assets/tiles/popsicle-d.webp" alt=""><img src="assets/tiles/strawberry-s.webp" alt="">
+            <img src="assets/tiles/cat-l.webp" alt=""><img src="assets/tiles/cotton-candy-e.webp" alt=""><img src="assets/tiles/sunflower-g.webp" alt=""><img src="assets/tiles/bowlingball-e.webp" alt=""><img src="assets/tiles/hedgehog-n.webp" alt=""><img src="assets/tiles/chocolate-d.webp" alt=""><img src="assets/tiles/smore-s.webp" alt="">
           </div>
         </article>
         <article class="card card--amber">
@@ -179,7 +183,7 @@
             <p>Avatar frames, chat packs and battle backgrounds. Style is for sale, power never is.</p>
           </div>
           <div class="frames" aria-hidden="true">
-            <img src="assets/art/frame-default.webp" alt=""><img src="assets/art/frame-hearts.webp" alt=""><img src="assets/art/frame-panda.webp" alt=""><img src="assets/art/frame-strawberry.webp" alt="">
+            <img src="assets/art/frame-legendary.webp" alt=""><img src="assets/art/frame-spacey.webp" alt=""><img src="assets/art/frame-carnival.webp" alt=""><img src="assets/art/frame-queen-bee.webp" alt="">
           </div>
         </article>
       </div>
@@ -189,8 +193,8 @@
 
   <!-- GET THE GAME -->
   <section class="get" id="get" aria-labelledby="get-h">
-    <img class="fl" data-d="0.25" src="assets/tiles/cheeseburger-r.webp" alt="" aria-hidden="true" style="--w:clamp(60px,7vw,110px); left:7%; top:16%; --r:-10deg">
-    <img class="fl" data-d="0.4" src="assets/tiles/pig-m.webp" alt="" aria-hidden="true" style="--w:clamp(56px,6.5vw,100px); right:8%; top:12%; --r:9deg">
+    <img class="fl" data-d="0.25" src="assets/tiles/brownie-r.webp" alt="" aria-hidden="true" style="--w:clamp(60px,7vw,110px); left:7%; top:16%; --r:-10deg">
+    <img class="fl" data-d="0.4" src="assets/tiles/ladybug-m.webp" alt="" aria-hidden="true" style="--w:clamp(56px,6.5vw,100px); right:8%; top:12%; --r:9deg">
     <img class="fl" data-d="0.15" src="assets/art/coin.webp" alt="" aria-hidden="true" style="--w:clamp(36px,3.6vw,58px); right:20%; top:42%">
     <div class="wrap">
       <h2 class="h2" id="get-h">Ready to become<br><span>a legend?</span></h2>
