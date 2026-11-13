@@ -1,5 +1,26 @@
-// Letter Legends one-pager. No libraries.
+// Letter Legends one-pager.
 (() => {
+  // ── Smooth scroll (Lenis), the same feel as glitchyard.co ───────────────────────────────────────
+  // Wheel and trackpad glide (1.5 s, 0.85 wheel distance); touch keeps native scrolling; reduced motion
+  // keeps plain scrolling. It starts only once the logo intro has finished (the intro locks scrolling).
+  // Native scroll events still fire, so every scroll-driven piece below works unchanged.
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const start = () => {
+      const s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js';
+      s.onload = () => {
+        if (!window.Lenis) return;
+        const lenis = new window.Lenis({ duration: 1.5, wheelMultiplier: 0.85, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true, anchors: { offset: matchMedia('(max-width: 760px)').matches ? -64 : -12 } });
+        const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
+        requestAnimationFrame(raf);
+      };
+      document.head.appendChild(s);
+    };
+    const root = document.documentElement;
+    if (!root.classList.contains('is-intro')) start();
+    else { const mo = new MutationObserver(() => { if (!root.classList.contains('is-intro')) { mo.disconnect(); start(); } }); mo.observe(root, { attributes: true, attributeFilter: ['class'] }); }
+  }
+
   // ── Stores ─────────────────────────────────────────────────────────────────────────────────────
   // The ONE launch switch. While a store is false its button reads as "Coming soon" and links nowhere
   // (neither listing is public yet; both URLs 404 today). Flip each to true the day it goes public.
