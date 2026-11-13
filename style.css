@@ -7,7 +7,7 @@
   --gold: #FFC63B; --gold-deep: #F59E0B; --pink: #EB4F9B; --blue: #2E6BFF; --teal: #15A39A; --amber: #FFB800;
   --white: #fff; --cloud: #EEF1FF;
   --head: 'Ringold', 'Anton', Impact, sans-serif;
-  --pw: clamp(158px, 21vw, 280px); /* hero phone width */
+  --pw: clamp(min(213px, 46vw), 28.4vw, 378px); /* hero phone width; on phones capped so both stay on screen */
   --body: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --r: 28px; --gut: clamp(16px, 4vw, 40px); --max: 1180px;
 }
@@ -130,18 +130,6 @@ p { margin: 0; }
 .lvl { padding: 5px 10px; border-radius: 999px; font: 900 12px/1 var(--body); text-transform: uppercase; letter-spacing: .06em; }
 .lvl--1 { background: #2FC26B; } .lvl--2 { background: var(--amber); color: var(--ink); } .lvl--3 { background: var(--pink); } .lvl--4 { background: var(--night); box-shadow: inset 0 0 0 2px var(--gold); color: var(--gold); }
 
-/* screenshots: a slow strip (pure CSS, pauses on hover) */
-.shots { position: relative; padding: clamp(40px, 6vw, 70px) 0; background: var(--deep); overflow: hidden; }
-.shots__track { display: flex; width: max-content; }
-.shots__set { display: flex; gap: clamp(14px, 1.6vw, 22px); padding-right: clamp(14px, 1.6vw, 22px); }
-.shots img { width: clamp(180px, 19vw, 280px); border-radius: 22px; box-shadow: 0 20px 40px rgba(10,4,40,.5); }
-.shots img:nth-child(odd) { transform: rotate(-2deg) translateY(6px); } .shots img:nth-child(even) { transform: rotate(2deg); }
-@media (prefers-reduced-motion: no-preference) {
-  .shots__track { animation: strip 60s linear infinite; }
-  .shots:hover .shots__track { animation-play-state: paused; }
-}
-@keyframes strip { to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) { .shots { overflow-x: auto; } }
 
 /* features bento */
 .bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 1.8vw, 22px); margin-top: clamp(36px, 5vw, 60px); text-align: left; }
