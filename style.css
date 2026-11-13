@@ -134,7 +134,7 @@ h1, h2, h3, p, figure, ol { margin: 0; }
 .row .pill { margin-top: 8px; }
 .row__art { display: none; }
 .rows .row__art { --pw: min(62vw, 300px); margin: 0 auto 18px; transform: rotateZ(-2deg); }
-.c-green { color: var(--green); } .c-blue { color: var(--blue); } .c-pink { color: var(--pink); } .c-gold { color: var(--gold); } .c-violet { color: var(--violet); }
+/* feature row headings are one colour: the ink */
 
 /* ── more to play ── */
 .more { background: var(--sky); } /* the same sky the white sheet sits on */
