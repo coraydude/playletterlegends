@@ -48,41 +48,143 @@
 
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ── More to play: each card's art loops only while that card is on screen ────────────────────
-  // CSS loops run off .is-on; the text loops (languages, bolts, frames, turns) step on one shared
-  // timer that only ticks while at least one card is visible.
+  // ── More to play: spring-physics loops, running only while a card is on screen ──────────────────
+  // Nothing here is a tween: every moving part is a damped spring (stiffness k, damping c) and every
+  // change of state is a KICK (a new target and/or an impulse), so things hop, overshoot, wobble and
+  // settle the way real objects do. One rAF drives every visible card at a fixed 240 Hz substep.
   (() => {
     const cards = [...document.querySelectorAll('[data-loop]')];
     if (!cards.length) return;
+    const S = (x, k = 220, c = 16) => ({ x, v: 0, t: x, k, c });
+    const stepS = (s, dt) => { s.v += (-s.k * (s.x - s.t) - s.c * s.v) * dt; s.x += s.v * dt; };
+    const setText = (b, text) => { b.textContent = text; };
+
+    // 1. Word of the Day: each tile hops to its slot (x spring + a jump under gravity + spin), lands with a squash
+    const wotd = document.querySelector('.wotd');
+    const tiles = wotd ? [...wotd.querySelectorAll('img')].map((el) => ({ el, dx: +el.style.getPropertyValue('--dx'), x: S(0, 170, 15), y: 0, vy: 0, air: false, rot: S(0, 260, 12), sq: S(0, 520, 18) })) : [];
+    tiles.forEach((t) => { t.x.x = t.x.t = t.dx; t.el.style.translate = 'none'; });
+    let solved = false;
+    const hop = (t, to, delay) => setTimeout(() => {
+      t.x.t = to; t.vy = -(560 + Math.random() * 160); t.air = true;
+      t.rot.v += (to - t.x.x) * -90 + (Math.random() - .5) * 120; t.sq.v -= 3;   // push-off stretch
+    }, delay);
+    const shuffleWotd = () => { solved = !solved; tiles.forEach((t, i) => hop(t, solved ? 0 : t.dx, i * 70 + Math.random() * 40)); };
+
+    // 2 + 6. pills that get flicked: a scale + lift spring kicked on every change; the backing cards lag behind
+    const pill = (root) => root && { el: root.querySelector('.lang__pill, .turns__pill'), b: root.querySelector('b'), s: S(1, 380, 14), y: S(0, 300, 13), r: S(0, 300, 11) };
     const lang = document.querySelector('.lang'), langs = lang ? lang.dataset.langs.split('|') : [];
-    const langPill = lang?.querySelector('.lang__pill'), langB = langPill?.querySelector('b');
-    const ring = document.querySelector('.ring'), ringB = ring?.querySelector('[data-count-to]'), ringTo = +(ringB?.dataset.countTo || 0);
-    const frames = [...document.querySelectorAll('.frames4 img')];
+    const lp = pill(lang), back = lang ? { s: S(0, 200, 12) } : null;
     const turns = document.querySelector('.turns'), turnList = turns ? turns.dataset.turns.split('|') : [];
-    const turnPill = turns?.querySelector('.turns__pill'), turnB = turnPill?.querySelector('b');
-    const flip = (pill, b, text) => { b.textContent = text; pill.classList.remove('is-flip'); void pill.offsetWidth; pill.classList.add('is-flip'); };
-    if (reduced) { if (ringB) { ringB.textContent = ringTo; ring.style.setProperty('--p', 100); } frames[0]?.classList.add('is-worn'); return; }
+    const tp = pill(turns);
+    const flick = (p, text, side = 1) => { setText(p.b, text); p.s.v += 2.6; p.y.v -= 260; p.r.v += 70 * side; };
+
+    // 3. leagues ring: the bolt count is a spring chasing its target (overshoots a hair, settles); each
+    // bolt "earned" thumps the icon
+    // ...and when the ring fills you are PROMOTED: the trophy is knocked away and the next tier drops in
+    // under gravity, lands with a squash and wobbles upright (bronze -> silver -> ... -> the star cup)
+    const ring = document.querySelector('.ring'), league = document.querySelector('.league');
+    const ringB = league?.querySelector('.bolts b'), ringIco = league?.querySelector('.bolts img');
+    const ringTo = +(ringB?.dataset.countTo || 0), val = S(0, 26, 7.5), ico = S(1, 420, 12);
+    const cups = [...(ring?.querySelectorAll('.trophy') || [])].map((el) => ({ el, s: S(0, 300, 14), y: 0, vy: 0, air: false, sq: S(0, 480, 16), rot: S(0, 240, 9), out: false }));
+    let lastShown = 0, tier = 0, promoted = false;
+    if (cups[0]) { cups[0].s.x = cups[0].s.t = 1; }
+    const promote = () => {
+      const old = cups[tier]; old.out = true; old.s.t = 0; old.s.v += 2.5; old.vy = -520; old.air = true; old.rot.v += 260;
+      tier = (tier + 1) % cups.length;
+      const c = cups[tier]; c.out = false; c.s.x = c.s.t = 1; c.s.v = 0; c.y = -150; c.vy = 0; c.air = true; c.rot.x = (Math.random() - .5) * 24; c.rot.t = 0;
+      ico.v += 4;
+    };
+
+    // 4. letter pass: the fill is a spring stepping between reward stops; each reward pops when reached
+    const passFill = document.querySelector('.pass__bar i'), passIcons = [...document.querySelectorAll('.pass img')];
+    const stops = passIcons.map((i) => +i.style.getPropertyValue('--at'));
+    const fill = S(0, 60, 11), pops = passIcons.map(() => ({ s: S(.72, 360, 11), hit: false }));
+    let stop = -1;
+
+    // 5. frames: the worn one springs up (with a wobble), the others settle back down
+    const frames = [...document.querySelectorAll('.frames4 img')].map((el, i) => ({ el, s: S(i ? .85 : 1.18, 300, 13), r: S(0, 260, 9) }));
+    let worn = 0;
+    frames.forEach((f) => { f.el.classList.remove('is-worn'); f.el.style.transition = 'none'; });
+
+    // ── the clock: beats fire per card on their own rhythm while visible ──
     const visible = new Set();
-    let timer = 0, tick = 0;
-    const step = () => {
-      tick++;
-      const on = (el) => el && visible.has(el.closest('[data-loop]'));
-      if (on(lang) && tick % 14 === 0) flip(langPill, langB, langs[(tick / 14) % langs.length]);
-      if (on(ring)) { // 0 -> 48 bolts over ~2.6 s, hold, restart
-        const t = tick % 44, k = Math.min(1, t / 26), e = 1 - (1 - k) ** 3;
-        ringB.textContent = Math.round(ringTo * e); ring.style.setProperty('--p', (e * 100).toFixed(1));
+    const on = (el) => el && visible.has(el.closest('[data-loop]'));
+    let clock = 0;
+    const beats = [
+      { el: wotd, every: 2.6, fn: shuffleWotd },
+      { el: lang, every: 1.5, fn: () => { flick(lp, langs[(langs.indexOf(lp.b.textContent) + 1) % langs.length]); back.s.v += 1.6; } },
+      { el: ring, every: 3.6, fn: () => { if (val.t) { val.t = 0; val.k = 40; promoted = false; } else { val.t = ringTo; val.k = 26; } } },
+      { el: passFill, every: 1.1, fn: () => { stop++; if (stop > stops.length) { stop = -1; fill.t = 0; pops.forEach((p) => { p.hit = false; p.s.t = .72; }); } else fill.t = stop < stops.length ? stops[stop] + .02 : 1; } },
+      { el: frames[0]?.el, every: 1.4, fn: () => { worn = (worn + 1) % frames.length; frames.forEach((f, i) => { f.s.t = i === worn ? 1.18 : .85; if (i === worn) { f.s.v += 2.2; f.r.v += (Math.random() < .5 ? -1 : 1) * 140; } }); } },
+      { el: turns, every: 1.8, fn: () => { const s = turnList[(turnList.indexOf(tp.b.textContent) + 1) % turnList.length]; flick(tp, s, -1); tp.el.classList.toggle('is-wait', /^Waiting/.test(s)); } },
+    ].filter((b) => b.el).map((b) => ({ ...b, next: .6 }));
+
+    const integrate = (dt) => {
+      if (on(wotd)) tiles.forEach((t) => {
+        stepS(t.x, dt); stepS(t.rot, dt); stepS(t.sq, dt);
+        if (t.air) { t.vy += 2600 * dt; t.y += t.vy * dt; if (t.y >= 0 && t.vy > 0) { t.y = 0; t.air = false; t.sq.v += t.vy * .006; t.rot.t = 0; } }
+      });
+      if (on(lang)) { stepS(lp.s, dt); stepS(lp.y, dt); stepS(lp.r, dt); stepS(back.s, dt); }
+      if (on(turns)) { stepS(tp.s, dt); stepS(tp.y, dt); stepS(tp.r, dt); }
+      if (on(ring)) {
+        stepS(val, dt); stepS(ico, dt);
+        if (val.t && !promoted && val.x >= ringTo * .985) { promoted = true; promote(); }
+        cups.forEach((c) => {
+          stepS(c.s, dt); stepS(c.sq, dt); stepS(c.rot, dt);
+          if (c.air) { c.vy += 2600 * dt; c.y += c.vy * dt;
+            if (!c.out && c.y >= 0 && c.vy > 0) { c.y = 0; c.air = false; c.sq.v += c.vy * .007; c.rot.v += (Math.random() - .5) * 200; }
+            if (c.out && c.s.x < .02) { c.air = false; c.y = 0; c.vy = 0; } }
+        });
       }
-      if (on(frames[0]) && tick % 12 === 0) frames.forEach((f, i) => f.classList.toggle('is-worn', i === (tick / 12) % frames.length));
-      if (on(turns) && tick % 16 === 0) {
-        const s = turnList[(tick / 16) % turnList.length];
-        flip(turnPill, turnB, s); turnPill.classList.toggle('is-wait', /^Waiting/.test(s));
+      if (on(passFill)) { stepS(fill, dt); pops.forEach((p, i) => { if (!p.hit && fill.x >= stops[i]) { p.hit = true; p.s.t = 1; p.s.v += 9; } stepS(p.s, dt); }); }
+      if (on(frames[0]?.el)) frames.forEach((f) => { stepS(f.s, dt); stepS(f.r, dt); });
+    };
+    const render = () => {
+      if (on(wotd)) tiles.forEach((t) => {
+        const q = Math.max(-.25, Math.min(.25, t.sq.x));
+        t.el.style.transform = `translate(calc(${t.x.x.toFixed(3)} * var(--t) * 1.1), ${t.y.toFixed(1)}px) rotate(${t.rot.x.toFixed(2)}deg) scale(${(1 + q * .6).toFixed(3)}, ${(1 - q).toFixed(3)})`;
+      });
+      for (const p of [lp, tp]) if (p && on(p.el)) p.el.style.transform = `translateY(${p.y.x.toFixed(1)}px) rotate(${p.r.x.toFixed(2)}deg) scale(${p.s.x.toFixed(4)})`;
+      if (lang && on(lang)) lang.style.setProperty('--lag', back.s.x.toFixed(3));
+      if (on(ring)) {
+        const n = Math.max(0, Math.round(val.x));
+        if (n !== lastShown) { if (n > lastShown) ico.v += 2.2; lastShown = n; ringB.textContent = n; }
+        ring.style.setProperty('--p', Math.max(0, Math.min(100, val.x / ringTo * 100)).toFixed(2));
+        ringIco.style.transform = `scale(${ico.x.toFixed(3)})`;
+        cups.forEach((c) => { const q = Math.max(-.25, Math.min(.25, c.sq.x)), s = Math.max(0, c.s.x);
+          c.el.style.opacity = s > .02 ? 1 : 0;
+          c.el.style.transform = `translateY(${c.y.toFixed(1)}px) rotate(${c.rot.x.toFixed(2)}deg) scale(${(s * (1 + q * .6)).toFixed(3)}, ${(s * (1 - q)).toFixed(3)})`; });
       }
+      if (on(passFill)) { passFill.style.transform = `scaleX(${Math.max(0, fill.x).toFixed(4)})`; passIcons.forEach((im, i) => { const s = pops[i].s.x; im.style.transform = `translate(-50%, -50%) scale(${s.toFixed(3)})`; im.style.opacity = pops[i].hit ? 1 : .55; }); }
+      if (on(frames[0]?.el)) frames.forEach((f, i) => { f.el.style.transform = `scale(${f.s.x.toFixed(4)}) rotate(${f.r.x.toFixed(2)}deg)`; f.el.style.opacity = i === worn ? 1 : .55; });
+    };
+
+    if (reduced) { // finished states, no motion
+      tiles.forEach((t) => { t.el.style.transform = 'none'; });
+      if (ringB) { ringB.textContent = ringTo; ring.style.setProperty('--p', 100); }
+      cups.forEach((c, i) => { c.el.style.opacity = i === cups.length - 1 ? 1 : 0; });
+      if (passFill) passFill.style.transform = 'scaleX(1)';
+      passIcons.forEach((im) => { im.style.transform = 'translate(-50%, -50%)'; im.style.opacity = 1; });
+      frames.forEach((f, i) => { f.el.style.transform = `scale(${i ? .85 : 1.18})`; f.el.style.opacity = i ? .55 : 1; });
+      return;
+    }
+    render();
+    let raf = 0, last = 0, acc = 0;
+    const DT = 1 / 240;
+    const loop = (now) => {
+      raf = 0;
+      if (!visible.size) { last = 0; return; }
+      const dt = last ? Math.min(.05, (now - last) / 1000) : 0; last = now;
+      clock += dt;
+      for (const b of beats) if (on(b.el) && clock >= b.next) { b.fn(); b.next = clock + b.every; }
+      acc += dt; while (acc >= DT) { integrate(DT); acc -= DT; }
+      render();
+      raf = requestAnimationFrame(loop);
     };
     const io = new IntersectionObserver((es) => {
       es.forEach((e) => { e.target.classList.toggle('is-on', e.isIntersecting); e.isIntersecting ? visible.add(e.target) : visible.delete(e.target); });
-      if (visible.size && !timer) timer = setInterval(step, 100);
-      else if (!visible.size && timer) { clearInterval(timer); timer = 0; }
-    }, { threshold: 0.25 });
+      if (visible.size && !raf) raf = requestAnimationFrame(loop);
+    }, { threshold: 0.2 });
     cards.forEach((c) => io.observe(c));
   })();
   if (reduced) { document.querySelector('.fab').classList.add('is-on'); words.forEach((w) => w.classList.add('is-lit')); document.querySelector('.fan3')?.style.setProperty('--open', 1); return; }
