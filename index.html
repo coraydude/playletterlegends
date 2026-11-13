@@ -20,6 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap">
+<link rel="preload" as="image" href="assets/logo.webp">
 <link rel="preload" as="font" type="font/woff" href="assets/fonts/Ringold-Soft.woff" crossorigin>
 <link rel="stylesheet" href="style.css">
 </head>
@@ -62,11 +63,15 @@
   <!-- HERO -->
   <section class="hero" id="top" aria-labelledby="hero-h">
     <div class="hero__frame">
-      <div class="ph ph--hero" data-label="Hero illustration: the legends in the sky"></div>
-      <h1 class="hero__word" id="hero-h">Letter Legends</h1>
+      <h1 class="hero__logo"><img src="assets/logo.webp" alt="Letter Legends" width="1200" height="585" fetchpriority="high"></h1>
+      <p class="hero__tag">The word game where every letter counts</p>
+      <!-- two real in-game screens in perspective: the VS intro on Android, the board on iPhone 17 -->
+      <div class="duo" role="img" aria-label="Letter Legends on Android and iPhone: the versus screen and the game board">
+        <div class="phone phone--android"><div class="phone__screen"><img src="assets/shots/ui-vs.webp" alt="" width="660" height="1435"></div></div>
+        <div class="phone phone--iphone"><div class="phone__screen"><img src="assets/shots/ui-board.webp" alt="" width="660" height="1435"></div></div>
+      </div>
       <div class="hero__bar">
         <a class="pill pill--dark" href="#get">Get the game</a>
-        <p class="hero__tag">The word game where every letter counts</p>
         <a class="pill pill--light" href="#how">How it plays</a>
       </div>
     </div>
