@@ -155,6 +155,14 @@ if __name__ == '__main__':
         if not os.path.exists(path):
             urllib.request.urlretrieve(frames[fid]['artUrl'], path + '.part'); os.replace(path + '.part', path)
         fit(path, f'art/frame-{fid.replace("_", "-")}.webp', 260)
+    # the sheet's pinned phone: one real capture per feature row (Device Simulator, iPhone 16 Pro). The
+    # bottom 44 px carry the dev build stamp (e.g. '002955db1 · dev · 10-29 22:20'), so they are cropped off.
+    for cap, name in (('match-board', 'spell'), ('home', 'path'), ('challenge-friends', 'battle'), ('albums-tiles', 'themes'),
+                      ('treasure-dig-intro', 'events'), ('match-end-result', 'won')):
+        im = Image.open(os.path.join(GAME, f'Screenshots/devices/iphone-16-pro/{cap}.png')).convert('RGB')
+        im = im.crop((0, 0, im.width, im.height - 44))
+        im = im.resize((620, round(im.height * 620 / im.width)), Image.LANCZOS)
+        im.save(os.path.join(OUT, 'shots', f'screen-{name}.webp'), quality=84, method=6)
     # hero phones: real in-game captures (Device Simulator, iPhone 16 Pro, 2026-11-11): the board + the VS intro
     for cap, name in (('match-board', 'board'), ('match-vs-intro', 'vs')):
         im = Image.open(os.path.join(GAME, f'Screenshots/devices/iphone-16-pro/{cap}.png')).convert('RGB')

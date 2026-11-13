@@ -72,7 +72,7 @@
   const cl = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
   const io3 = (t) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
   const floats = [...document.querySelectorAll('[data-d]')].map((el) => ({ el, d: parseFloat(el.dataset.d), sec: el.closest('section') }));
-  const cards = [...document.querySelectorAll('.stack__card')], rows = [...document.querySelectorAll('.row')];
+  const shots = [...document.querySelectorAll('.stack__shot')], rows = [...document.querySelectorAll('.row')];
   const fan3 = document.querySelector('.fan3');
   const fab = document.querySelector('.fab'), missionSec = mission?.closest('section');
   let raf = 0, litN = -1;
@@ -94,14 +94,13 @@
       if (r.bottom < -200 || r.top > VH + 200) continue;
       f.el.style.transform = `translate3d(0, ${((r.top + r.height / 2 - VH / 2) * f.d).toFixed(1)}px, 0)`;
     }
-    // the sheet: each row's art card slides up over the last one as that row reaches the middle
-    if (cards.length && getComputedStyle(cards[0].parentElement).display !== 'none') {
-      const k = rows.map((row, i) => (i === 0 ? 1 : io3(cl((VH * 0.85 - row.getBoundingClientRect().top) / (VH * 0.5)))));
-      cards.forEach((c, i) => {
+    // the sheet: the pinned phone's screen switches to each row's screen as that row reaches the middle
+    if (shots.length && getComputedStyle(shots[0].closest('.stack')).display !== 'none') {
+      const k = rows.map((row, i) => (i === 0 ? 1 : io3(cl((VH * 0.78 - row.getBoundingClientRect().top) / (VH * 0.32)))));
+      shots.forEach((s, i) => {
         const next = k[i + 1] || 0;
-        c.style.transform = `translate3d(0, ${((1 - k[i]) * 150 - next * 4).toFixed(2)}%, 0) rotate(${((1 - k[i]) * 7).toFixed(2)}deg) scale(${(1 - next * 0.06).toFixed(3)})`;
-        c.style.opacity = cl(k[i] * 2.5).toFixed(3); // the next card waits off stage until its row arrives
-        c.style.filter = next ? `brightness(${(1 - next * 0.12).toFixed(3)})` : '';
+        s.style.opacity = i === 0 ? 1 : k[i].toFixed(3);
+        s.style.transform = `translate3d(0, ${((1 - k[i]) * 6).toFixed(2)}%, 0) scale(${(1 + (1 - k[i]) * 0.04 - next * 0.03).toFixed(4)})`;
       });
     }
     // card packs: the fan spreads as the section comes up the screen (closed stack -> open fan)

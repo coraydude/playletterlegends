@@ -119,45 +119,50 @@
     </div>
   </section>
 
-  <!-- THE SHEET: alternating feature rows; the art cards stack up as you scroll -->
+  <!-- THE SHEET: alternating feature rows beside one pinned phone whose screen follows the rows -->
   <section class="sheet" id="how" aria-label="How it plays">
     <div class="sheet__in">
+      <!-- one pinned phone; its screen switches to each row's real game screen as that row scrolls in -->
       <div class="stack" aria-hidden="true">
-        <div class="stack__card ph" style="--ph-bg:#2BC160" data-label="Art: spelling a word on the board"></div>
-        <div class="stack__card ph" style="--ph-bg:#1792FC" data-label="Art: the level path"></div>
-        <div class="stack__card ph" style="--ph-bg:#EB4F9B" data-label="Art: a battle with a friend"></div>
-        <div class="stack__card ph" style="--ph-bg:#FFB800" data-label="Art: a card pack opening"></div>
-        <div class="stack__card ph" style="--ph-bg:#7B3FE4" data-label="Art: this week's event"></div>
-        <div class="stack__card ph" style="--ph-bg:#1792FC" data-label="Art: the game on a phone"></div>
+        <div class="phone phone--iphone stack__phone">
+          <div class="phone__screen">
+            <img class="stack__shot" src="assets/shots/screen-spell.webp" alt="" width="620" height="1325">
+            <img class="stack__shot" src="assets/shots/screen-path.webp" alt="" width="620" height="1325" loading="lazy">
+            <img class="stack__shot" src="assets/shots/screen-battle.webp" alt="" width="620" height="1325" loading="lazy">
+            <img class="stack__shot" src="assets/shots/screen-themes.webp" alt="" width="620" height="1325" loading="lazy">
+            <img class="stack__shot" src="assets/shots/screen-events.webp" alt="" width="620" height="1325" loading="lazy">
+            <img class="stack__shot" src="assets/shots/screen-won.webp" alt="" width="620" height="1325" loading="lazy">
+          </div>
+        </div>
       </div>
       <div class="rows">
         <article class="row">
-          <div class="row__art ph" style="--ph-bg:#2BC160" data-label="Art: spelling a word on the board"></div>
+          <div class="row__art phone phone--iphone"><div class="phone__screen"><img src="assets/shots/screen-spell.webp" alt="The match board" width="620" height="1325" loading="lazy"></div></div>
           <h2 data-fx>Spell. <em class="c-green">Score.</em> Repeat.</h2>
           <p data-fx>Make the best word you can from the letters in your rack. Rare letters score big, and the last three rounds multiply your points up to ×4.</p>
         </article>
         <article class="row">
-          <div class="row__art ph" style="--ph-bg:#1792FC" data-label="Art: the level path"></div>
+          <div class="row__art phone phone--iphone"><div class="phone__screen"><img src="assets/shots/screen-path.webp" alt="Home and the level path" width="620" height="1325" loading="lazy"></div></div>
           <h2 data-fx>Beat the <em class="c-blue">legends</em></h2>
           <p data-fx>Climb the level path and face Bo, Fen, Vera and Lex. Bo warms you up. Lex is the boss.</p>
         </article>
         <article class="row">
-          <div class="row__art ph" style="--ph-bg:#EB4F9B" data-label="Art: a battle with a friend"></div>
+          <div class="row__art phone phone--iphone"><div class="phone__screen"><img src="assets/shots/screen-battle.webp" alt="Challenge Friends" width="620" height="1325" loading="lazy"></div></div>
           <h2 data-fx>Battle your <em class="c-pink">friends</em></h2>
           <p data-fx>Challenge a friend or a player anywhere in the world, turn by turn. No timers: take your turn whenever it suits you.</p>
         </article>
         <article class="row">
-          <div class="row__art ph" style="--ph-bg:#FFB800" data-label="Art: a card pack opening"></div>
+          <div class="row__art phone phone--iphone"><div class="phone__screen"><img src="assets/shots/screen-themes.webp" alt="The Tile Themes album" width="620" height="1325" loading="lazy"></div></div>
           <h2 data-fx><em class="c-gold">Collect</em> tile themes</h2>
           <p data-fx>Open card packs, fill each tile's four parts and unlock new tile themes. Complete whole albums for bonus rewards.</p>
         </article>
         <article class="row">
-          <div class="row__art ph" style="--ph-bg:#7B3FE4" data-label="Art: this week's event"></div>
+          <div class="row__art phone phone--iphone"><div class="phone__screen"><img src="assets/shots/screen-events.webp" alt="Treasure Dig: how to dig" width="620" height="1325" loading="lazy"></div></div>
           <h2 data-fx>Events <em class="c-violet">every week</em></h2>
           <p data-fx>Dig for treasure in Treasure Dig, race in Word Rally and bounce for prizes in Bonus Bounce. A new event is always on its way.</p>
         </article>
         <article class="row">
-          <div class="row__art ph" style="--ph-bg:#1792FC" data-label="Art: the game on a phone"></div>
+          <div class="row__art phone phone--iphone"><div class="phone__screen"><img src="assets/shots/screen-won.webp" alt="A won match" width="620" height="1325" loading="lazy"></div></div>
           <h2 data-fx>Get the <em class="c-blue">game</em> today!</h2>
           <p data-fx>Letter Legends is free to play, with optional purchases. Coming soon to iPhone and Android.</p>
           <a class="pill pill--dark" href="#get" data-fx>Get the game</a>
