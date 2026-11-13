@@ -20,255 +20,214 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap">
-<link rel="preload" as="image" href="assets/logo.webp">
 <link rel="preload" as="font" type="font/woff" href="assets/fonts/Ringold-Soft.woff" crossorigin>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="bar">
-  <a class="bar__icon" href="#top" aria-label="Letter Legends, back to top"><img src="assets/app-icon.png" alt="" width="44" height="44"></a>
-  <a class="bar__cta" href="#get">Get the game</a>
-</header>
+<!-- announcement ticker -->
+<div class="ticker" aria-label="Letter Legends is coming soon to iPhone and Android">
+  <div class="ticker__track" aria-hidden="true">
+    <div class="ticker__set">
+      <span class="ticker__dot ph"></span><b>Letter Legends is coming soon!</b><a href="#get" tabindex="-1">Get the game</a>
+      <span class="ticker__dot ph"></span><b>On iPhone and Android</b><a href="#get" tabindex="-1">Get the game</a>
+      <span class="ticker__dot ph"></span><b>Letter Legends is coming soon!</b><a href="#get" tabindex="-1">Get the game</a>
+      <span class="ticker__dot ph"></span><b>Free to play</b><a href="#get" tabindex="-1">Get the game</a>
+    </div>
+    <div class="ticker__set">
+      <span class="ticker__dot ph"></span><b>Letter Legends is coming soon!</b><a href="#get" tabindex="-1">Get the game</a>
+      <span class="ticker__dot ph"></span><b>On iPhone and Android</b><a href="#get" tabindex="-1">Get the game</a>
+      <span class="ticker__dot ph"></span><b>Letter Legends is coming soon!</b><a href="#get" tabindex="-1">Get the game</a>
+      <span class="ticker__dot ph"></span><b>Free to play</b><a href="#get" tabindex="-1">Get the game</a>
+    </div>
+  </div>
+</div>
+
+<!-- left rail: menu + the vertical wordmark -->
+<aside class="rail">
+  <button class="rail__menu" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open the menu"><i></i><i></i><i></i></button>
+  <a class="rail__word" href="#top" aria-label="Letter Legends, back to top">Letter Legends</a>
+</aside>
+<nav class="menu" id="menu" aria-label="Sections" hidden>
+  <a href="#how">How it plays</a>
+  <a href="#more">More to play</a>
+  <a href="#legends">The legends</a>
+  <a href="#rounds">Five rounds</a>
+  <a href="#get">Get the game</a>
+</nav>
 
 <main id="main">
 
-  <!-- HERO: the game's sky -->
+  <!-- HERO -->
   <section class="hero" id="top" aria-labelledby="hero-h">
-    <div class="float" aria-hidden="true">
-      <img class="fl" data-d="-0.25" src="assets/tiles/dog-w.webp" alt="" style="--w:clamp(64px,8vw,120px); left:6%; top:18%; --r:-12deg">
-      <img class="fl" data-d="-0.4" src="assets/art/coin.webp" alt="" style="--w:clamp(40px,4.5vw,70px); left:17%; top:44%">
-      <img class="fl" data-d="-0.15" src="assets/tiles/gummybear-q.webp" alt="" style="--w:clamp(60px,7vw,110px); left:8%; top:66%; --r:9deg">
-      <img class="fl" data-d="-0.35" src="assets/tiles/fox-k.webp" alt="" style="--w:clamp(60px,7.5vw,116px); right:7%; top:16%; --r:10deg">
-      <img class="fl" data-d="-0.2" src="assets/art/gem.webp" alt="" style="--w:clamp(38px,4vw,62px); right:19%; top:40%">
-      <img class="fl" data-d="-0.45" src="assets/tiles/rubberduck-z.webp" alt="" style="--w:clamp(58px,7vw,108px); right:6%; top:62%; --r:-8deg">
-    </div>
-    <div class="hero__in">
-      <h1 id="hero-h"><img class="hero__logo" src="assets/logo.webp" alt="Letter Legends" width="1200" height="585"></h1>
-      <p class="hero__tag">The word game where every letter counts.</p>
-      <div class="rack rack--hero" aria-label="P L A Y">
-        <img src="assets/tiles/default-p.webp" alt=""><img src="assets/tiles/default-l.webp" alt=""><img src="assets/tiles/default-a.webp" alt=""><img src="assets/tiles/default-y.webp" alt="">
-      </div>
-      <div class="stores" data-stores>
-        <a class="store" data-store="ios" aria-label="Download on the App Store"><img src="assets/app-store-badge.svg" alt="Download on the App Store" height="52"></a>
-        <a class="store" data-store="android" aria-label="Get it on Google Play"><img src="assets/google-play-badge.png" alt="Get it on Google Play" height="52"></a>
-        <p class="soon" data-soon>Coming soon to iPhone and Android</p>
-      </div>
-    </div>
-    <!-- two real in-game screens in perspective: the VS intro on Android, the board on iPhone 17 -->
-    <div class="duo" role="img" aria-label="Letter Legends on Android and iPhone: the versus screen and the game board">
-      <div class="phone phone--android"><div class="phone__screen"><img src="assets/shots/ui-vs.webp" alt="" width="660" height="1435"></div></div>
-      <div class="phone phone--iphone"><div class="phone__screen"><img src="assets/shots/ui-board.webp" alt="" width="660" height="1435"></div></div>
-    </div>
-  </section>
-
-  <!-- HOW IT PLAYS -->
-  <section class="sec sec--violet plays" aria-labelledby="plays-h">
-    <div class="wrap">
-      <div class="rack rack--small" aria-hidden="true">
-        <img src="assets/tiles/default-s.webp" alt=""><img src="assets/tiles/default-p.webp" alt=""><img src="assets/tiles/default-e.webp" alt=""><img src="assets/tiles/default-l.webp" alt=""><img src="assets/tiles/default-l.webp" alt="">
-      </div>
-      <h2 class="h2" id="plays-h">Quick rounds.<br><span>Clever words.</span></h2>
-      <div class="steps">
-        <article class="step">
-          <img src="assets/tiles/donut-o.webp" alt="" class="step__art">
-          <h3>Spell from your letters</h3>
-          <p>Make the best word you can from the tiles in your rack. Stuck? Swap your letters and try again.</p>
-        </article>
-        <article class="step">
-          <img src="assets/tiles/boxingglove-x.webp" alt="" class="step__art">
-          <h3>Rare letters score big</h3>
-          <p>Every tile carries points. Land a Q, X or Z and watch your score jump.</p>
-        </article>
-        <article class="step">
-          <img src="assets/art/bolt.webp" alt="" class="step__art step__art--bolt">
-          <h3>Later rounds count more</h3>
-          <p>Five rounds a match, and the last three multiply your score up to ×4. Save your best word.</p>
-        </article>
+    <div class="hero__frame">
+      <div class="ph ph--hero" data-label="Hero illustration: the legends in the sky"></div>
+      <h1 class="hero__word" id="hero-h">Letter Legends</h1>
+      <div class="hero__bar">
+        <a class="pill pill--dark" href="#get">Get the game</a>
+        <p class="hero__tag">The word game where every letter counts</p>
+        <a class="pill pill--light" href="#how">How it plays</a>
       </div>
     </div>
   </section>
 
-  <!-- THE LEGENDS -->
-  <section class="sec sec--deep legends" aria-labelledby="legends-h">
-    <img class="fl" data-d="0.18" src="assets/tiles/sheep-j.webp" alt="" aria-hidden="true" style="--w:clamp(56px,6vw,96px); left:4%; top:12%; --r:-10deg">
-    <img class="fl" data-d="0.3" src="assets/art/coin.webp" alt="" aria-hidden="true" style="--w:clamp(36px,3.6vw,58px); right:6%; top:18%">
-    <div class="wrap">
-      <p class="kicker">Your rivals</p>
-      <h2 class="h2" id="legends-h">Beat the <span>legends</span></h2>
-      <p class="lede">Climb the level path and face four legends. Bo warms you up. Lex is the boss.</p>
-      <div class="legends__row">
-        <figure class="legend"><img src="assets/art/legend-bo.webp" alt="Bo, a cheeky orange legend" width="360" height="360"><figcaption><b>Bo</b><span class="lvl lvl--1">Easy</span></figcaption></figure>
-        <figure class="legend"><img src="assets/art/legend-fen.webp" alt="Fen, a sly green legend" width="360" height="360"><figcaption><b>Fen</b><span class="lvl lvl--2">Medium</span></figcaption></figure>
-        <figure class="legend"><img src="assets/art/legend-vera.webp" alt="Vera, a bubbly pink legend" width="360" height="360"><figcaption><b>Vera</b><span class="lvl lvl--3">Hard</span></figcaption></figure>
-        <figure class="legend"><img src="assets/art/legend-lex.webp" alt="Lex, a fearless blue legend" width="360" height="360"><figcaption><b>Lex</b><span class="lvl lvl--4">Super hard</span></figcaption></figure>
+  <!-- SPOTLIGHT CARD + CHIPS -->
+  <section class="sky spot-wrap" aria-labelledby="spot-h">
+    <article class="spot" data-fx>
+      <div class="spot__copy">
+        <h2 id="spot-h">Four legends stand in your way</h2>
+        <p>Bo, Fen, Vera and Lex. Beat them all on the level path.</p>
+        <a class="pill pill--dark" href="#legends">Meet the legends</a>
+      </div>
+      <div class="ph ph--spot" data-label="Art: the four legends together"></div>
+    </article>
+    <div class="chips">
+      <p class="chips__title" data-fx>Inside the game</p>
+      <div class="chips__row">
+        <div class="chip" data-fx><span class="ph ph--chip"></span><span><b>10 languages</b><small>Play in yours</small></span></div>
+        <div class="chip" data-fx><span class="ph ph--chip"></span><span><b>Free to play</b><small>Style for sale, never power</small></span></div>
+        <div class="chip" data-fx><span class="ph ph--chip"></span><span><b>No timers</b><small>Battles at your pace</small></span></div>
       </div>
     </div>
   </section>
 
-  <!-- SCROLL STORIES: each one plays only while you scroll (progress = scroll position) -->
-  <section class="story story--packs" data-story="packs" aria-labelledby="packs-h">
-    <div class="story__stage">
-      <div class="story__copy">
-        <p class="kicker">Card packs</p>
-        <h2 class="h2" id="packs-h">Rip it open.<br><span>Unlock a tile.</span></h2>
-        <ol class="beats">
-          <li>Rip open a card pack</li>
-          <li>Every pack deals four cards for one tile</li>
-          <li>Each card fills one of the tile's four parts</li>
-          <li>Fill all four parts and the tile is yours</li>
-        </ol>
+  <!-- MISSION: lights up word by word as you scroll -->
+  <section class="sky mission" aria-label="About Letter Legends">
+    <p class="mission__text" data-words>Letter Legends is a word game of quick rounds and clever spelling. Beat the four legends, battle your friends turn by turn and collect tile themes along the way. Every letter counts.</p>
+    <div class="ph ph--mascot" data-label="Mascot"></div>
+  </section>
+
+  <!-- CAST: floating characters (parallax) -->
+  <section class="sky cast" aria-hidden="true">
+    <div class="ph ph--float" data-d="-0.35" style="--w:150px; left:8%; top:8%" data-label="Bo"></div>
+    <div class="ph ph--float" data-d="-0.15" style="--w:110px; left:30%; top:44%" data-label="Tile"></div>
+    <div class="ph ph--float" data-d="-0.5" style="--w:170px; left:50%; top:4%" data-label="Fen"></div>
+    <div class="ph ph--float" data-d="-0.25" style="--w:120px; right:22%; top:52%" data-label="Gem"></div>
+    <div class="ph ph--float" data-d="-0.42" style="--w:160px; right:6%; top:12%" data-label="Vera"></div>
+    <div class="ph ph--float" data-d="-0.2" style="--w:130px; left:12%; top:64%" data-label="Lex"></div>
+    <div class="ph ph--float" data-d="-0.3" style="--w:90px; left:46%; top:76%" data-label="Coin"></div>
+  </section>
+
+  <!-- THE SHEET: alternating feature rows; the art cards stack up as you scroll -->
+  <section class="sheet" id="how" aria-label="How it plays">
+    <div class="sheet__in">
+      <div class="stack" aria-hidden="true">
+        <div class="stack__card ph" style="--ph-bg:#2BC160" data-label="Art: spelling a word on the board"></div>
+        <div class="stack__card ph" style="--ph-bg:#1792FC" data-label="Art: the level path"></div>
+        <div class="stack__card ph" style="--ph-bg:#EB4F9B" data-label="Art: a battle with a friend"></div>
+        <div class="stack__card ph" style="--ph-bg:#FFB800" data-label="Art: a card pack opening"></div>
+        <div class="stack__card ph" style="--ph-bg:#7B3FE4" data-label="Art: this week's event"></div>
+        <div class="stack__card ph" style="--ph-bg:#1792FC" data-label="Art: the game on a phone"></div>
       </div>
-      <div class="story__box">
-        <div class="story__vis pk" role="img" aria-label="A card pack rips open, deals the dog tile's four part cards (Paw, Fur, Tail and Ear), their progress bars fill, and the dog tile unlocks">
-          <div class="pk-glow"></div>
-          <div class="pk-pack">
-            <img class="pk-body" src="assets/story/pack-epic.webp" alt="" width="440" height="696">
-            <img class="pk-top" src="assets/story/pack-epic.webp" alt="" width="440" height="696">
-          </div>
-          <div class="pk-flash"></div>
-          <div class="pk-parts"></div>
-          <div class="pk-unlock">
-            <div class="pk-rays"></div>
-            <img class="pk-tile" src="assets/story/dog-w-big.webp" alt="" width="560" height="560">
-            <p class="pk-label">Dog tile unlocked!</p>
-          </div>
-        </div>
+      <div class="rows">
+        <article class="row">
+          <div class="row__art ph" style="--ph-bg:#2BC160" data-label="Art: spelling a word on the board"></div>
+          <h2 data-fx>Spell. <em class="c-green">Score.</em> Repeat.</h2>
+          <p data-fx>Make the best word you can from the letters in your rack. Rare letters score big, and the last three rounds multiply your points up to ×4.</p>
+        </article>
+        <article class="row">
+          <div class="row__art ph" style="--ph-bg:#1792FC" data-label="Art: the level path"></div>
+          <h2 data-fx>Beat the <em class="c-blue">legends</em></h2>
+          <p data-fx>Climb the level path and face Bo, Fen, Vera and Lex. Bo warms you up. Lex is the boss.</p>
+        </article>
+        <article class="row">
+          <div class="row__art ph" style="--ph-bg:#EB4F9B" data-label="Art: a battle with a friend"></div>
+          <h2 data-fx>Battle your <em class="c-pink">friends</em></h2>
+          <p data-fx>Challenge a friend or a player anywhere in the world, turn by turn. No timers: take your turn whenever it suits you.</p>
+        </article>
+        <article class="row">
+          <div class="row__art ph" style="--ph-bg:#FFB800" data-label="Art: a card pack opening"></div>
+          <h2 data-fx><em class="c-gold">Collect</em> tile themes</h2>
+          <p data-fx>Open card packs, fill each tile's four parts and unlock new tile themes. Complete whole albums for bonus rewards.</p>
+        </article>
+        <article class="row">
+          <div class="row__art ph" style="--ph-bg:#7B3FE4" data-label="Art: this week's event"></div>
+          <h2 data-fx>Events <em class="c-violet">every week</em></h2>
+          <p data-fx>Dig for treasure in Treasure Dig, race in Word Rally and bounce for prizes in Bonus Bounce. A new event is always on its way.</p>
+        </article>
+        <article class="row">
+          <div class="row__art ph" style="--ph-bg:#1792FC" data-label="Art: the game on a phone"></div>
+          <h2 data-fx>Get the <em class="c-blue">game</em> today!</h2>
+          <p data-fx>Letter Legends is free to play, with optional purchases. Coming soon to iPhone and Android.</p>
+          <a class="pill pill--dark" href="#get" data-fx>Get the game</a>
+        </article>
       </div>
     </div>
   </section>
 
-  <section class="story story--dig story--flip" data-story="dig" aria-labelledby="dig-h">
-    <div class="story__stage">
-      <div class="story__copy">
-        <img class="story__logo" src="assets/art/logo-dig.webp" alt="Treasure Dig" width="520" height="342">
-        <h2 class="h2" id="dig-h">Dig deep.<br><span>Find treasure.</span></h2>
-        <ol class="beats">
-          <li>Play matches to earn shovels</li>
-          <li>Dig the board to uncover coins and gems</li>
-          <li>Clear the board to open the chest</li>
-        </ol>
-      </div>
-      <div class="story__box">
-        <div class="story__vis dg" role="img" aria-label="A pickaxe digs through the Treasure Dig board, uncovering coins and gems, then the treasure chest bursts open">
-          <img class="dg-board" src="assets/story/dig-board.webp" alt="" width="1000" height="1108">
-          <div class="dg-grid"></div>
-          <div class="dg-dim"></div>
-          <img class="dg-pick" src="assets/story/pickaxe.webp" alt="" width="300" height="301">
-          <div class="dg-chest">
-            <img class="dg-closed" src="assets/story/chest-closed.webp" alt="" width="380" height="309">
-            <img class="dg-open" src="assets/story/chest-open.webp" alt="" width="380" height="394">
-          </div>
-          <div class="dg-burst"></div>
-          <p class="dg-label">Board cleared!</p>
-        </div>
-      </div>
+  <!-- BIG NUMBER -->
+  <section class="sky count" aria-labelledby="count-h">
+    <div class="count__in">
+      <p class="count__num" data-fx>10</p>
+      <h2 id="count-h" data-fx>languages to play in</h2>
+      <p class="count__sub" data-fx>English (US and UK), Spanish, French, German, Italian, Dutch, Swedish, Danish and Norwegian.</p>
+      <a class="pill pill--dark" href="#get" data-fx>Get the game</a>
+    </div>
+    <div class="ph ph--ground" data-label="Illustration: the legends at play"></div>
+  </section>
+
+  <!-- MORE TO PLAY: three cards -->
+  <section class="sky more" id="more" aria-labelledby="more-h">
+    <h2 class="h2" id="more-h" data-fx>More to play, every day</h2>
+    <p class="lede" data-fx>Something new is always waiting when you open the game.</p>
+    <div class="more__grid">
+      <article class="post" data-fx>
+        <div class="ph ph--post" style="--ph-bg:#2BC160" data-label="Word of the Day art"></div>
+        <small>Daily</small>
+        <h3>Word of the Day</h3>
+        <p>Unscramble the day's seven-letter word to win the chest.</p>
+      </article>
+      <article class="post" data-fx>
+        <div class="ph ph--post" style="--ph-bg:#EB4F9B" data-label="Leagues art"></div>
+        <small>Weekly</small>
+        <h3>Weekly leagues</h3>
+        <p>Win matches, earn lightning bolts and climb the league table each week.</p>
+      </article>
+      <article class="post" data-fx>
+        <div class="ph ph--post" style="--ph-bg:#FFB800" data-label="Letter Pass art"></div>
+        <small>Every season</small>
+        <h3>Letter Pass</h3>
+        <p>Play to unlock coins, gems, avatar frames and tile themes all season long.</p>
+      </article>
     </div>
   </section>
 
-  <section class="story story--bounce" data-story="bounce" aria-labelledby="bounce-h">
-    <div class="story__stage">
-      <div class="story__copy">
-        <img class="story__logo" src="assets/art/logo-bounce.webp" alt="Bonus Bounce" width="520" height="247">
-        <h2 class="h2" id="bounce-h">Drop it.<br><span>Watch it bounce.</span></h2>
-        <ol class="beats">
-          <li>Win matches to earn balls</li>
-          <li>Drop a ball through the pegs</li>
-          <li>Land in a cup: coins, card packs or the Gold Tile jackpot</li>
-        </ol>
-      </div>
-      <div class="story__box">
-        <div class="story__vis bb" role="img" aria-label="A ball drops through the Bonus Bounce pegs, bounces off the bumpers and lands in the 600 coin cup">
-          <img class="bb-board" src="assets/story/pd-board.webp" alt="" width="760" height="1419">
-          <div class="bb-field"></div>
-          <div class="bb-burst"></div>
-          <p class="bb-label">+600 coins!</p>
-        </div>
-      </div>
+  <!-- THE LEGENDS: a fan of tilted cards -->
+  <section class="sky legends" id="legends" aria-labelledby="legends-h">
+    <h2 class="h2" id="legends-h" data-fx>The legends</h2>
+    <div class="fan">
+      <figure class="fan__card" style="--r:-9deg; --y:26px; --c:#FF8A3D"><div class="ph ph--legend" data-label="Bo"></div><figcaption><b>Bo</b><span>Easy</span></figcaption></figure>
+      <figure class="fan__card" style="--r:-3deg; --y:0px; --c:#2BC160"><div class="ph ph--legend" data-label="Fen"></div><figcaption><b>Fen</b><span>Medium</span></figcaption></figure>
+      <figure class="fan__card" style="--r:4deg; --y:6px; --c:#EB4F9B"><div class="ph ph--legend" data-label="Vera"></div><figcaption><b>Vera</b><span>Hard</span></figcaption></figure>
+      <figure class="fan__card" style="--r:10deg; --y:30px; --c:#2E6BFF"><div class="ph ph--legend" data-label="Lex"></div><figcaption><b>Lex</b><span>Super hard</span></figcaption></figure>
     </div>
+    <a class="pill pill--dark" href="#get" data-fx>Take them on</a>
   </section>
 
-  <!-- FEATURES -->
-  <section class="sec sec--violet feats" aria-labelledby="feats-h">
-    <img class="fl" data-d="0.22" src="assets/tiles/popcorn-f.webp" alt="" aria-hidden="true" style="--w:clamp(56px,6vw,96px); right:5%; top:6%; --r:10deg">
-    <img class="fl" data-d="0.35" src="assets/art/gem.webp" alt="" aria-hidden="true" style="--w:clamp(34px,3.4vw,54px); left:5%; top:8%">
-    <div class="wrap">
-      <p class="kicker">So much to play</p>
-      <h2 class="h2" id="feats-h">There's always <span>one more game</span></h2>
-      <div class="bento">
-        <article class="card card--blue card--wide">
-          <div class="card__copy">
-            <h3>Battle your friends</h3>
-            <p>Challenge a friend or a player anywhere in the world, turn by turn. No timers: take your turn whenever it suits you.</p>
-          </div>
-          <img class="card__art card__art--hex" src="assets/art/hex-trio.webp" alt="" width="900" height="900">
-        </article>
-        <article class="card card--rasp">
-          <h3>Collect tile themes</h3>
-          <p>Fill albums of tile themes and play every word in your favourite.</p>
-          <div class="themes" aria-label="L E G E N D S on seven tile themes">
-            <img src="assets/tiles/cat-l.webp" alt=""><img src="assets/tiles/cotton-candy-e.webp" alt=""><img src="assets/tiles/sunflower-g.webp" alt=""><img src="assets/tiles/bowlingball-e.webp" alt=""><img src="assets/tiles/hedgehog-n.webp" alt=""><img src="assets/tiles/chocolate-d.webp" alt=""><img src="assets/tiles/smore-s.webp" alt="">
-          </div>
-        </article>
-        <article class="card card--amber">
-          <img class="card__badge card__badge--rally" src="assets/art/logo-rally.webp" alt="Word Rally">
-          <h3>Race in Word Rally</h3>
-          <p>Roll the dice, race three other players over three days and win the championship on points.</p>
-        </article>
-        <article class="card card--teal">
-          <img class="card__badge" src="assets/art/logo-wotd.webp" alt="Word of the Day">
-          <h3>A new puzzle daily</h3>
-          <p>Unscramble the day's seven-letter word to win the chest.</p>
-        </article>
-        <article class="card card--deep">
-          <img class="card__trophy" src="assets/art/trophy.webp" alt="">
-          <h3>Weekly leagues</h3>
-          <p>Win matches, earn lightning bolts and climb the league table each week.</p>
-        </article>
-        <article class="card card--violet">
-          <img class="card__badge" src="assets/art/logo-pass.webp" alt="Letter Pass">
-          <h3>Rewards all season</h3>
-          <p>Play to unlock coins, gems, avatar frames and tile themes on the season pass.</p>
-        </article>
-        <article class="card card--blue card--wide">
-          <div class="card__copy">
-            <h3>Make it your own</h3>
-            <p>Avatar frames, chat packs and battle backgrounds. Style is for sale, power never is.</p>
-          </div>
-          <div class="frames" aria-hidden="true">
-            <img src="assets/art/frame-legendary.webp" alt=""><img src="assets/art/frame-spacey.webp" alt=""><img src="assets/art/frame-carnival.webp" alt=""><img src="assets/art/frame-queen-bee.webp" alt="">
-          </div>
-        </article>
-      </div>
-      <p class="langs">Play in 10 languages: English (US and UK), Spanish, French, German, Italian, Dutch, Swedish, Danish and Norwegian.</p>
-    </div>
+  <!-- FIVE ROUNDS: a timeline that lights up as you scroll -->
+  <section class="sky rounds" id="rounds" aria-labelledby="rounds-h">
+    <h2 class="h2" id="rounds-h" data-fx>Five rounds. <span>Rising stakes.</span></h2>
+    <ol class="tl">
+      <li class="tl__item"><b>Round 1</b><p><strong>×1</strong> Warm up and find your first word.</p></li>
+      <li class="tl__item"><b>Round 2</b><p><strong>×1</strong> Read your rack and build a lead.</p></li>
+      <li class="tl__item"><b>Round 3</b><p><strong>×2</strong> Every point counts double.</p></li>
+      <li class="tl__item"><b>Round 4</b><p><strong>×3</strong> Triple points. Comebacks happen here.</p></li>
+      <li class="tl__item"><b>Round 5</b><p><strong>×4</strong> Save your best word for last.</p></li>
+    </ol>
   </section>
 
-  <!-- GET THE GAME -->
-  <section class="get" id="get" aria-labelledby="get-h">
-    <img class="fl" data-d="0.25" src="assets/tiles/brownie-r.webp" alt="" aria-hidden="true" style="--w:clamp(60px,7vw,110px); left:7%; top:16%; --r:-10deg">
-    <img class="fl" data-d="0.4" src="assets/tiles/ladybug-m.webp" alt="" aria-hidden="true" style="--w:clamp(56px,6.5vw,100px); right:8%; top:12%; --r:9deg">
-    <img class="fl" data-d="0.15" src="assets/art/coin.webp" alt="" aria-hidden="true" style="--w:clamp(36px,3.6vw,58px); right:20%; top:42%">
-    <div class="wrap">
-      <h2 class="h2" id="get-h">Ready to become<br><span>a legend?</span></h2>
-      <p class="lede">Letter Legends is free to play.</p>
-      <div class="stores" data-stores>
-        <a class="store" data-store="ios" aria-label="Download on the App Store"><img src="assets/app-store-badge.svg" alt="Download on the App Store" height="52"></a>
-        <a class="store" data-store="android" aria-label="Get it on Google Play"><img src="assets/google-play-badge.png" alt="Get it on Google Play" height="52"></a>
-        <p class="soon" data-soon>Coming soon to iPhone and Android</p>
-      </div>
-    </div>
-    <img class="crew" src="assets/art/crew.webp" alt="" width="1400" height="512" aria-hidden="true">
-  </section>
 </main>
 
-<footer class="foot">
-  <div class="wrap foot__in">
-    <div class="foot__brand">
-      <img src="assets/logo.webp" alt="Letter Legends" width="1200" height="585" loading="lazy">
-      <p>A game by <a href="https://glitchyard.co">GlitchYard</a>.</p>
+<!-- FOOTER -->
+<footer class="foot" id="get">
+  <div class="foot__in">
+    <h2 class="foot__h" data-fx>Where every letter counts</h2>
+    <div class="stores" data-stores data-fx>
+      <a class="pill pill--light store" data-store="ios">App Store</a>
+      <a class="pill pill--light store" data-store="android">Google Play</a>
     </div>
+    <p class="soon" data-soon>Coming soon to iPhone and Android</p>
     <nav class="foot__links" aria-label="Help and legal">
       <a href="https://glitchyard.co/support">Support</a>
       <a href="https://glitchyard.co/privacy">Privacy</a>
@@ -278,10 +237,18 @@
       <a href="https://glitchyard.co/delete-account">Delete account</a>
     </nav>
   </div>
-  <p class="wrap foot__note">© 2026 GlitchYard · support@glitchyard.co<br>Letter Legends is free to play. Optional purchases include cosmetics, currency and Gold Tiles; Gold Tiles can also be earned by playing. Play is intended for ages 13 and up. GlitchYard is not affiliated with Apple or Google.</p>
+  <div class="foot__art">
+    <div class="ph ph--burst" data-label="Illustration: the cast bursting out of the wordmark"></div>
+    <p class="foot__word" aria-hidden="true">Letter Legends</p>
+  </div>
+  <div class="foot__base">
+    <p>A game by <a href="https://glitchyard.co">GlitchYard</a> · support@glitchyard.co</p>
+    <p>© 2026 GlitchYard. Free to play. Optional purchases include cosmetics, currency and Gold Tiles, which can also be earned by playing. Ages 13 and up. Not affiliated with Apple or Google.</p>
+  </div>
 </footer>
 
+<a class="fab ph" href="#top" aria-label="Back to top"></a>
+
 <script src="main.js" defer></script>
-<script src="story.js" defer></script>
 </body>
 </html>
