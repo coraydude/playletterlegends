@@ -1,11 +1,13 @@
 /* Letter Legends: one page. Palette from the game (splash sky, home purple, gold logo, legend colours).
-   Lilita One for display (the store-art lettering), Nunito for everything else. */
+   Ringold Soft for display (the GlitchYard house face, same as glitchyard.co), Nunito for everything else. */
+@font-face { font-family: 'Ringold'; src: url('assets/fonts/Ringold-Soft.woff') format('woff'); font-weight: 400; font-display: swap; }
 :root {
   --sky1: #1792FC; --sky2: #2EA4FD; --sky3: #9AB6F9;
   --violet: #5A2BD8; --deep: #2B0F86; --night: #170650; --ink: #1B1145;
   --gold: #FFC63B; --gold-deep: #F59E0B; --pink: #EB4F9B; --blue: #2E6BFF; --teal: #15A39A; --amber: #FFB800;
   --white: #fff; --cloud: #EEF1FF;
-  --head: 'Lilita One', 'Arial Rounded MT Bold', system-ui, sans-serif;
+  --head: 'Ringold', 'Anton', Impact, sans-serif;
+  --pw: clamp(158px, 21vw, 280px); /* hero phone width */
   --body: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --r: 28px; --gut: clamp(16px, 4vw, 40px); --max: 1180px;
 }
@@ -57,11 +59,13 @@ p { margin: 0; }
   .rack--hero img { animation: drop .75s cubic-bezier(.3,1.5,.5,1) both; }
   .rack--hero img:nth-child(1) { animation-delay: .55s; } .rack--hero img:nth-child(2) { animation-delay: .62s; }
   .rack--hero img:nth-child(3) { animation-delay: .69s; } .rack--hero img:nth-child(4) { animation-delay: .76s; }
-  .hero__mascot { animation: peek 1s cubic-bezier(.3,1.4,.5,1) .9s both; }
+  .duo { animation: rise 1.1s cubic-bezier(.2,.9,.25,1) .7s both; }
+  .phone { animation: bob 6.4s ease-in-out infinite alternate; }
+  .phone--iphone { animation-duration: 5.6s; animation-delay: -2.8s; }
 }
 @keyframes logo-in { from { opacity: 0; transform: scale(.6) translateY(30px); } }
 @keyframes drop { from { opacity: 0; translate: 0 -70vh; } 35% { opacity: 1; } }
-@keyframes peek { from { transform: translateY(100%); } }
+@keyframes rise { from { opacity: 0; translate: 0 140px; } }
 .hero__tag { margin-top: 6px; font: 400 clamp(22px, 2.6vw, 34px)/1.15 var(--head); text-shadow: 0 3px 0 rgba(23,6,80,.25); }
 .rack { display: flex; justify-content: center; gap: clamp(4px, .6vw, 10px); }
 .rack img { width: clamp(52px, 6.6vw, 96px); filter: drop-shadow(0 10px 12px rgba(23,6,80,.3)); }
@@ -76,17 +80,36 @@ p { margin: 0; }
 .soon::before { content: ''; display: inline-block; width: 8px; height: 8px; margin: 0 8px 1px 0; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(255,198,59,.3); animation: pulse 1.8s ease-in-out infinite; }
 @keyframes pulse { 50% { box-shadow: 0 0 0 8px rgba(255,198,59,0); } }
 .stores:not(.is-soon) .soon { display: none; }
-/* the mascot stands in front of the clouds: its feet sink into the band that opens the next section */
-.hero__mascot { position: relative; z-index: 3; width: min(300px, 46vw); margin: auto 0 calc(-1 * min(110px, 15vw)); padding-top: 24px; }
+/* two phones in perspective, standing on the seam into the next section (it pads for the overlap) */
+.duo { position: relative; z-index: 3; display: flex; justify-content: center; align-items: flex-start; margin: clamp(40px, 6vw, 70px) 0 calc(var(--pw) * -.8); perspective: 1700px; }
+.phone { position: relative; width: var(--pw); padding: calc(var(--pw) * .03); border-radius: calc(var(--pw) * .165); background: #0B0B10; transform-style: preserve-3d; }
+.phone__screen { position: relative; overflow: hidden; border-radius: calc(var(--pw) * .138); aspect-ratio: 1206 / 2622; background: #6A3CE0; }
+.phone__screen img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.phone__screen::after { content: ''; position: absolute; inset: 0; background: linear-gradient(118deg, rgba(255,255,255,.2) 0%, rgba(255,255,255,.04) 34%, transparent 35%); pointer-events: none; }
+.phone::after { content: ''; position: absolute; top: 25%; right: calc(var(--pw) * -.016); width: calc(var(--pw) * .016); height: 11%; border-radius: 0 3px 3px 0; background: var(--rim); }
+/* iPhone 17: lavender aluminium rim, Dynamic Island, action + volume buttons on the left */
+.phone--iphone { --rim: #BBA8E6; z-index: 2; margin-left: calc(var(--pw) * -.04);
+  transform: rotateX(6deg) rotateY(-24deg) rotateZ(3deg);
+  box-shadow: 0 0 0 calc(var(--pw) * .013) var(--rim), 0 0 0 calc(var(--pw) * .018) #8E78C9, -30px 50px 70px rgba(23,6,80,.45); }
+.phone--iphone .phone__screen::before { content: ''; position: absolute; z-index: 1; top: 1.9%; left: 50%; width: 30%; height: 3.4%; translate: -50% 0; border-radius: 999px; background: #000; }
+.phone--iphone::before { content: ''; position: absolute; left: calc(var(--pw) * -.016); top: 17%; width: calc(var(--pw) * .016); height: 4%; border-radius: 3px 0 0 3px; background: var(--rim);
+  box-shadow: 0 calc(var(--pw) * .16) 0 var(--rim), 0 calc(var(--pw) * .3) 0 var(--rim); }
+/* Android: graphite frame, squarer corners, 20:9 screen, punch-hole camera */
+.phone--android { --rim: #3A3A46; z-index: 1; margin-top: calc(var(--pw) * .16); border-radius: calc(var(--pw) * .12);
+  transform: rotateX(6deg) rotateY(26deg) rotateZ(-4deg) translateZ(-30px);
+  box-shadow: 0 0 0 calc(var(--pw) * .012) var(--rim), 30px 50px 70px rgba(23,6,80,.4); }
+.phone--android .phone__screen { border-radius: calc(var(--pw) * .095); aspect-ratio: 9 / 20; }
+.phone--android .phone__screen::before { content: ''; position: absolute; z-index: 1; top: 1.6%; left: 50%; width: 5.4%; aspect-ratio: 1; translate: -50% 0; border-radius: 50%; background: #000; box-shadow: 0 0 0 2px #15151c; }
+
+/* display type: uppercase, as on glitchyard.co */
+.h2, .hero__tag, .step h3, .card h3, .legend b { text-transform: uppercase; }
 
 /* sections */
 .sec { position: relative; padding: clamp(80px, 11vw, 140px) 0; text-align: center; overflow: hidden; }
 .sec--violet { background: var(--violet); }
 .sec--deep { background: var(--deep); }
 
-/* clouds hang from the sky into the purple (their flat top edge meets the hero's last colour) */
-.clouds { position: absolute; top: -1px; left: 50%; width: max(2200px, 140vw); max-width: none; transform: translateX(-50%); z-index: 1; pointer-events: none; }
-.plays { padding-top: clamp(150px, 18vw, 230px); background: linear-gradient(180deg, #7C8EF3 0, var(--violet) 320px); }
+.plays { padding-top: calc(var(--pw) * .8 + clamp(56px, 7vw, 90px)); background: linear-gradient(180deg, var(--sky3) 0, #7C8EF3 calc(var(--pw) * .5), var(--violet) calc(var(--pw) * 1.2)); }
 
 .rack--small { margin-bottom: 22px; }
 .rack--small img { width: clamp(40px, 4.6vw, 64px); }
@@ -190,4 +213,5 @@ p { margin: 0; }
   .foot__in { flex-direction: column; align-items: flex-start; }
   .fl { display: none; }
   .hero .fl[src*="/tiles/"] { display: block; }
+  .hero .fl[src*="dog-w"], .hero .fl[src*="fox-k"] { display: none; } /* they would sit on the two-line tagline */
 }
