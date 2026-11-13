@@ -70,14 +70,16 @@ h1, h2, h3, p, figure, ol { margin: 0; }
 .lede { max-width: 34em; margin: 16px auto 0; text-align: center; font-size: clamp(17px, 1.5vw, 20px); opacity: .92; }
 
 /* ── hero ── */
-.hero { height: calc(100svh - var(--tick)); min-height: 560px; padding: 12px; }
-.hero__frame { position: relative; height: 100%; overflow: hidden; border-radius: 34px; display: flex; flex-direction: column; align-items: center;
-  padding: clamp(18px, 3svh, 36px) 16px 0; background: radial-gradient(60% 40% at 50% 26%, rgba(255,255,255,.3), transparent 70%), linear-gradient(180deg, var(--sky) 0%, var(--sky-2) 55%, #9AD0FF 100%); }
+.hero { min-height: calc(100svh - var(--tick)); padding: 12px 12px 0; display: flex; }
+.hero__frame { position: relative; flex: 1; overflow: hidden; border-radius: 34px 34px 0 0; display: flex; flex-direction: column; align-items: center;
+  padding: clamp(18px, 3svh, 36px) 16px clamp(110px, 12svh, 150px);
+  /* the sky brightens behind the logo and phones, then lands on the next section's colour: no seam */
+  background: radial-gradient(60% 34% at 50% 20%, rgba(255,255,255,.3), transparent 70%), linear-gradient(180deg, var(--sky) 0%, var(--sky-2) 22%, #8CCBFF 55%, var(--sky-2) 82%, var(--sky) 100%); }
 .hero__logo { width: min(600px, 70vw, 32svh * 2.05); filter: drop-shadow(0 14px 22px rgba(10,50,140,.3)); }
 .hero__logo img { width: 100%; }
 .hero__tag { margin-top: 4px; font: 400 clamp(20px, 2vw, 30px)/1.1 var(--head); text-transform: uppercase; text-align: center; text-shadow: 0 3px 0 rgba(10,70,170,.3); }
 /* the phones rise from the frame's bottom edge (the frame crops them) */
-.hero { --pw: clamp(150px, min(34vw, 27svh), 330px); }
+.hero { --pw: clamp(210px, min(36vw, 37.8svh), 462px); } /* 40% up on the earlier size; the hero grows to show them whole */
 .duo { position: relative; display: flex; justify-content: center; align-items: flex-start; margin-top: clamp(16px, 3.4svh, 40px); perspective: 1700px; }
 .phone { position: relative; width: var(--pw); padding: calc(var(--pw) * .03); border-radius: calc(var(--pw) * .165); background: #0B0B10; transform-style: preserve-3d; }
 .phone__screen { position: relative; overflow: hidden; border-radius: calc(var(--pw) * .138); aspect-ratio: 1206 / 2622; background: #6A3CE0; }
@@ -228,11 +230,12 @@ h1, h2, h3, p, figure, ol { margin: 0; }
   .rail { top: var(--tick); bottom: auto; width: 100%; height: 56px; flex-direction: row-reverse; padding: 0 12px; }
   .rail__word { writing-mode: horizontal-tb; transform: none; font-size: 24px; }
   .menu { top: calc(var(--tick) + 56px); left: 0; width: 100%; bottom: auto; padding: 14px; }
-  .hero { height: calc(100svh - var(--tick) - 56px); min-height: 520px; padding: 8px; }
-  .hero__frame { border-radius: 26px; }
+  .hero { min-height: calc(100svh - var(--tick) - 56px); padding: 8px 8px 0; }
+  .hero__frame { padding-bottom: 96px; }
+  .hero__frame { border-radius: 26px 26px 0 0; }
   .hero__bar { left: 12px; right: 12px; bottom: 12px; }
   .hero__bar .pill { flex: 1; padding: 12px 14px; font-size: 15px; }
-  .hero { --pw: min(44vw, 30svh); }
+  .hero { --pw: 46vw; } /* the widest both tilted phones fit side by side at phone width */
   .sheet { margin: 0 8px; border-radius: 30px; }
   .sheet__in { grid-template-columns: 1fr; }
   .stack { display: none; }
