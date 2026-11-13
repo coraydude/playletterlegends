@@ -153,7 +153,7 @@ h1, h2, h3, p, figure, ol { margin: 0; }
 .c-green { color: var(--green); } .c-blue { color: var(--blue); } .c-pink { color: var(--pink); } .c-gold { color: var(--gold); } .c-violet { color: var(--violet); }
 
 /* ── more to play ── */
-.more { background: var(--sky-deep); }
+.more { background: var(--sky); } /* the same sky the white sheet sits on */
 .more__grid { max-width: var(--max); margin: clamp(36px, 5vw, 60px) auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .post { padding: 14px 14px 28px; border-radius: 30px; transition: transform .25s cubic-bezier(.3,1.5,.5,1); }
 .post:hover { transform: translateY(-6px); }
