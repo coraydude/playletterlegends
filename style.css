@@ -70,8 +70,8 @@ h1, h2, h3, p, figure, ol { margin: 0; }
 .lede { max-width: 34em; margin: 16px auto 0; text-align: center; font-size: clamp(17px, 1.5vw, 20px); opacity: .92; }
 
 /* ── hero ── */
-.hero { min-height: calc(100svh - var(--tick)); padding: 12px 12px 0; display: flex; }
-.hero__frame { position: relative; flex: 1; overflow: hidden; border-radius: 34px 34px 0 0; display: flex; flex-direction: column; align-items: center;
+.hero { position: relative; z-index: 3; min-height: calc(100svh - var(--tick)); padding: 12px 12px 0; display: flex; }
+.hero__frame { position: relative; flex: 1; min-width: 0; overflow-x: clip; overflow-y: visible; /* the phones' shadows fall past the frame onto the next section */ border-radius: 34px 34px 0 0; display: flex; flex-direction: column; align-items: center;
   padding: clamp(18px, 3svh, 36px) 16px clamp(40px, 6svh, 70px);
   /* the sky brightens behind the logo and phones, then lands on the next section's colour: no seam */
   background: radial-gradient(60% 34% at 50% 20%, rgba(255,255,255,.3), transparent 70%), linear-gradient(180deg, var(--sky) 0%, var(--sky-2) 22%, #8CCBFF 55%, var(--sky-2) 82%, var(--sky) 100%); }
