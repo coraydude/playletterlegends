@@ -43,6 +43,8 @@ TILES = [
     ('default', 'P'), ('default', 'L'), ('default', 'A'), ('default', 'Y'),
     # how it plays: S P E L L on the classic tile
     ('default', 'S'), ('default', 'E'),
+    # Word of the Day card: L E G E N D S on the classic tile
+    ('default', 'G'), ('default', 'N'), ('default', 'D'),
     # collect: LEGENDS across seven themes
     ('cat', 'L'), ('cotton-candy', 'E'), ('sunflower', 'G'), ('bowlingball', 'E'), ('hedgehog', 'N'), ('chocolate', 'D'), ('smore', 'S'),
     # floating around the page and in the steps
@@ -157,8 +159,10 @@ if __name__ == '__main__':
         fit(path, f'art/frame-{fid.replace("_", "-")}.webp', 260)
     # the sheet's pinned phone: one real capture per feature row (Device Simulator, iPhone 16 Pro). The
     # bottom 44 px carry the dev build stamp (e.g. '002955db1 · dev · 10-29 22:20'), so they are cropped off.
-    for cap, name in (('match-board', 'spell'), ('home', 'path'), ('challenge-friends', 'battle'), ('albums-tiles', 'themes'),
-                      ('treasure-dig-intro', 'events'), ('match-end-result', 'won')):
+    # Captured with Letter Legends/QA/Capture Website Screens (iPhone 16 Pro). 'spell' is not re-baked: its last
+    # capture caught the rack empty, so the committed screen-spell.webp (rack ZSOFMAD) stays.
+    for cap, name in (('home', 'path'), ('challenge-friends', 'battle'), ('albums-tiles', 'themes'),
+                      ('site-treasure-dig', 'events'), ('site-match-end', 'won')):
         im = Image.open(os.path.join(GAME, f'Screenshots/devices/iphone-16-pro/{cap}.png')).convert('RGB')
         im = im.crop((0, 0, im.width, im.height - 44))
         im = im.resize((620, round(im.height * 620 / im.width)), Image.LANCZOS)
