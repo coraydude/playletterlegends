@@ -194,6 +194,14 @@ if __name__ == '__main__':
         'td-gem': ('TreasureDig/Resources/TreasureDig/td-gem.png', 120),
         'pickaxe': ('TreasureDig/Resources/TreasureDig/td-pickaxe.png', 300),
         'chest-closed': ('TreasureDig/Resources/TreasureDig/td-chest-purple-closed.png', 380),
+        'chest-brown-closed': ('TreasureDig/Resources/TreasureDig/td-chest-brown-closed.png', 300),
+        'chest-brown-open': ('TreasureDig/Resources/TreasureDig/td-chest-brown-open.png', 300),
+        'chest-green-closed': ('TreasureDig/Resources/TreasureDig/td-chest-green-closed.png', 300),
+        'chest-green-open': ('TreasureDig/Resources/TreasureDig/td-chest-green-open.png', 300),
+        'chest-blue-closed': ('TreasureDig/Resources/TreasureDig/td-chest-blue-closed.png', 300),
+        'chest-blue-open': ('TreasureDig/Resources/TreasureDig/td-chest-blue-open.png', 300),
+        'chest-purple-closed': ('TreasureDig/Resources/TreasureDig/td-chest-purple-closed.png', 300),
+        'chest-purple-open': ('TreasureDig/Resources/TreasureDig/td-chest-purple-open.png', 300),
         'chest-open': ('TreasureDig/Resources/TreasureDig/td-chest-purple-open.png', 380),
         'pd-board': ('PegDrop/Resources/PegDrop/pd-board.png', 760),
         'bumper': ('PegDrop/Resources/PegDrop/pd-multiplier-peg.png', 170),
@@ -203,7 +211,7 @@ if __name__ == '__main__':
         'cup-pack': ('PegDrop/Resources/PegDrop/pd-cup-pack-common.png', 120),
     }
     for name, (src, w) in story.items():
-        fit(src, f'story/{name}.webp', w)
+        fit(src, f'story/{name}.webp', w, crop=name.startswith('chest-'))  # chests cropped so closed/open share a bottom edge
     # the part cards wear the tile's own art (no letter), as the game's card faces do
     dog_art, *_ = skin_art('dog')
     fit(dog_art.filename, 'story/dog-art.webp', 300)

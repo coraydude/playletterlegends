@@ -95,11 +95,21 @@
       ico.v += 4;
     };
 
-    // 4. letter pass: the fill is a spring stepping between reward stops; each reward pops when reached
-    const passFill = document.querySelector('.pass__bar i'), passIcons = [...document.querySelectorAll('.pass img')];
-    const stops = passIcons.map((i) => +i.style.getPropertyValue('--at'));
-    const fill = S(0, 60, 11), pops = passIcons.map(() => ({ s: S(.72, 360, 11), hit: false }));
-    let stop = -1;
+    // 4. rewards: a chest drops in and lands with a squash, rocks with growing anticipation, bursts open and
+    // sprays its loot (coins, gems, a tile, a frame, a bolt) under gravity -- the loot bounces on the floor and
+    // fades -- then the chest shrinks away and the next tier (brown, green, blue, purple) drops in.
+    const chx = document.querySelector('.chx');
+    const chests = chx ? [...chx.querySelectorAll('.chx__chest')] : [];
+    const loot = chx ? [...chx.querySelectorAll('.chx__loot img')].map((el) => ({ el, x: 0, y: 0, vx: 0, vy: 0, r: 0, vr: 0, life: 0 })) : [];
+    const ch = { i: 0, phase: 'drop', t: 0, y: -190, vy: 0, sq: S(0, 520, 15), rot: S(0, 360, 10), s: S(1, 260, 15), kicks: 0 };
+    const burst = () => {
+      const W = chx.clientWidth, H = chx.clientHeight, ox = W / 2, oy = H - 14 - 100;
+      loot.forEach((p, k) => {
+        const a = -Math.PI / 2 + (k / (loot.length - 1) - .5) * 2.6 + (Math.random() - .5) * .3;
+        const sp = 520 + Math.random() * 300;
+        Object.assign(p, { x: ox, y: oy, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, r: 0, vr: (Math.random() - .5) * 900, life: 1.9 + Math.random() * .3 });
+      });
+    };
 
     // 5. frames: the worn one springs up (with a wobble), the others settle back down
     const frames = [...document.querySelectorAll('.frames4 img')].map((el, i) => ({ el, s: S(i ? .85 : 1.18, 300, 13), r: S(0, 260, 9) }));
@@ -114,7 +124,6 @@
       { el: wotd, every: 2.6, fn: shuffleWotd },
       { el: lang, every: 1.5, fn: () => { flick(lp, langs[(langs.indexOf(lp.b.textContent) + 1) % langs.length]); back.s.v += 1.6; } },
       { el: ring, every: 3.6, fn: () => { if (val.t) { val.t = 0; val.k = 40; promoted = false; } else { val.t = ringTo; val.k = 26; } } },
-      { el: passFill, every: 1.1, fn: () => { stop++; if (stop > stops.length) { stop = -1; fill.t = 0; pops.forEach((p) => { p.hit = false; p.s.t = .72; }); } else fill.t = stop < stops.length ? stops[stop] + .02 : 1; } },
       { el: frames[0]?.el, every: 1.4, fn: () => { worn = (worn + 1) % frames.length; frames.forEach((f, i) => { f.s.t = i === worn ? 1.18 : .85; if (i === worn) { f.s.v += 2.2; f.r.v += (Math.random() < .5 ? -1 : 1) * 140; } }); } },
       { el: turns, every: 1.8, fn: () => { const s = turnList[(turnList.indexOf(tp.b.textContent) + 1) % turnList.length]; flick(tp, s, -1); tp.el.classList.toggle('is-wait', /^Waiting/.test(s)); } },
     ].filter((b) => b.el).map((b) => ({ ...b, next: .6 }));
@@ -136,7 +145,28 @@
             if (c.out && c.s.x < .02) { c.air = false; c.y = 0; c.vy = 0; } }
         });
       }
-      if (on(passFill)) { stepS(fill, dt); pops.forEach((p, i) => { if (!p.hit && fill.x >= stops[i]) { p.hit = true; p.s.t = 1; p.s.v += 9; } stepS(p.s, dt); }); }
+      if (on(chx)) {
+        stepS(ch.sq, dt); stepS(ch.rot, dt); stepS(ch.s, dt); ch.t += dt;
+        const el = chests[ch.i];
+        if (ch.phase === 'drop') { ch.vy += 2600 * dt; ch.y += ch.vy * dt;
+          if (ch.y >= 0) { ch.sq.v += ch.vy * .006; ch.rot.v += (Math.random() - .5) * 120; ch.y = 0; ch.vy = 0; ch.phase = 'rest'; ch.t = 0; ch.kicks = 0; } }
+        else if (ch.phase === 'rest' && ch.t > .55) { ch.phase = 'shake'; ch.t = 0; }
+        else if (ch.phase === 'shake') {
+          const at = [0, .32, .58, .8][ch.kicks];
+          if (at !== undefined && ch.t >= at) { const side = ch.kicks % 2 ? 1 : -1; ch.rot.v += side * (160 + ch.kicks * 90); ch.sq.v += .8 + ch.kicks * .5; ch.kicks++; }
+          if (ch.t > 1.02) { ch.phase = 'open'; ch.t = 0; el.classList.add('is-open'); ch.sq.v -= 7; ch.rot.v *= .3; burst(); }
+        }
+        else if (ch.phase === 'open' && ch.t > 2.1) { ch.phase = 'leave'; ch.t = 0; ch.s.t = 0; ch.s.v -= 1.5; }
+        else if (ch.phase === 'leave' && ch.t > .4) {
+          el.classList.remove('is-open'); el.style.opacity = 0;
+          ch.i = (ch.i + 1) % chests.length; ch.phase = 'drop'; ch.t = 0; ch.y = -190; ch.vy = 0; ch.s.x = ch.s.t = 1; ch.s.v = 0; ch.rot.x = (Math.random() - .5) * 16; ch.rot.v = 0;
+        }
+        const W = chx.clientWidth, floor = chx.clientHeight - 22;
+        loot.forEach((p) => { if (p.life <= 0) return;
+          p.vy += 1700 * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.r += p.vr * dt; p.life -= dt;
+          if (p.y > floor && p.vy > 0) { p.y = floor; p.vy *= -.42; p.vx *= .7; p.vr *= .6; if (Math.abs(p.vy) < 60) p.vy = 0; }
+          if (p.x < 18 || p.x > W - 18) { p.x = Math.max(18, Math.min(W - 18, p.x)); p.vx *= -.5; } });
+      }
       if (on(frames[0]?.el)) frames.forEach((f) => { stepS(f.s, dt); stepS(f.r, dt); });
     };
     const render = () => {
@@ -155,7 +185,14 @@
           c.el.style.opacity = s > .02 ? 1 : 0;
           c.el.style.transform = `translateY(${c.y.toFixed(1)}px) rotate(${c.rot.x.toFixed(2)}deg) scale(${(s * (1 + q * .6)).toFixed(3)}, ${(s * (1 - q)).toFixed(3)})`; });
       }
-      if (on(passFill)) { passFill.style.transform = `scaleX(${Math.max(0, fill.x).toFixed(4)})`; passIcons.forEach((im, i) => { const s = pops[i].s.x; im.style.transform = `translate(-50%, -50%) scale(${s.toFixed(3)})`; im.style.opacity = pops[i].hit ? 1 : .55; }); }
+      if (on(chx)) {
+        const el = chests[ch.i], q = Math.max(-.3, Math.min(.3, ch.sq.x)), s = Math.max(0, ch.s.x);
+        chests.forEach((c) => { if (c !== el) c.style.opacity = 0; });
+        el.style.opacity = s > .02 ? 1 : 0;
+        el.style.transform = `translateY(${ch.y.toFixed(1)}px) rotate(${ch.rot.x.toFixed(2)}deg) scale(${(s * (1 + q * .55)).toFixed(3)}, ${(s * (1 - q)).toFixed(3)})`;
+        loot.forEach((p) => { p.el.style.opacity = p.life > 0 ? Math.min(1, p.life / .5).toFixed(3) : 0;
+          if (p.life > 0) p.el.style.transform = `translate(calc(${p.x.toFixed(1)}px - 50% - ${chx.clientWidth / 2}px), calc(${p.y.toFixed(1)}px - 50%)) rotate(${p.r.toFixed(1)}deg)`; });
+      }
       if (on(frames[0]?.el)) frames.forEach((f, i) => { f.el.style.transform = `scale(${f.s.x.toFixed(4)}) rotate(${f.r.x.toFixed(2)}deg)`; f.el.style.opacity = i === worn ? 1 : .55; });
     };
 
@@ -163,8 +200,7 @@
       tiles.forEach((t) => { t.el.style.transform = 'none'; });
       if (ringB) { ringB.textContent = ringTo; ring.style.setProperty('--p', 100); }
       cups.forEach((c, i) => { c.el.style.opacity = i === cups.length - 1 ? 1 : 0; });
-      if (passFill) passFill.style.transform = 'scaleX(1)';
-      passIcons.forEach((im) => { im.style.transform = 'translate(-50%, -50%)'; im.style.opacity = 1; });
+      if (chests[3]) { chests[3].style.opacity = 1; chests[3].classList.add('is-open'); }
       frames.forEach((f, i) => { f.el.style.transform = `scale(${i ? .85 : 1.18})`; f.el.style.opacity = i ? .55 : 1; });
       return;
     }
