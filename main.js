@@ -47,6 +47,44 @@
   }
 
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ── More to play: each card's art loops only while that card is on screen ────────────────────
+  // CSS loops run off .is-on; the text loops (languages, bolts, frames, turns) step on one shared
+  // timer that only ticks while at least one card is visible.
+  (() => {
+    const cards = [...document.querySelectorAll('[data-loop]')];
+    if (!cards.length) return;
+    const lang = document.querySelector('.lang'), langs = lang ? lang.dataset.langs.split('|') : [];
+    const langPill = lang?.querySelector('.lang__pill'), langB = langPill?.querySelector('b');
+    const ring = document.querySelector('.ring'), ringB = ring?.querySelector('[data-count-to]'), ringTo = +(ringB?.dataset.countTo || 0);
+    const frames = [...document.querySelectorAll('.frames4 img')];
+    const turns = document.querySelector('.turns'), turnList = turns ? turns.dataset.turns.split('|') : [];
+    const turnPill = turns?.querySelector('.turns__pill'), turnB = turnPill?.querySelector('b');
+    const flip = (pill, b, text) => { b.textContent = text; pill.classList.remove('is-flip'); void pill.offsetWidth; pill.classList.add('is-flip'); };
+    if (reduced) { if (ringB) { ringB.textContent = ringTo; ring.style.setProperty('--p', 100); } frames[0]?.classList.add('is-worn'); return; }
+    const visible = new Set();
+    let timer = 0, tick = 0;
+    const step = () => {
+      tick++;
+      const on = (el) => el && visible.has(el.closest('[data-loop]'));
+      if (on(lang) && tick % 14 === 0) flip(langPill, langB, langs[(tick / 14) % langs.length]);
+      if (on(ring)) { // 0 -> 48 bolts over ~2.6 s, hold, restart
+        const t = tick % 44, k = Math.min(1, t / 26), e = 1 - (1 - k) ** 3;
+        ringB.textContent = Math.round(ringTo * e); ring.style.setProperty('--p', (e * 100).toFixed(1));
+      }
+      if (on(frames[0]) && tick % 12 === 0) frames.forEach((f, i) => f.classList.toggle('is-worn', i === (tick / 12) % frames.length));
+      if (on(turns) && tick % 16 === 0) {
+        const s = turnList[(tick / 16) % turnList.length];
+        flip(turnPill, turnB, s); turnPill.classList.toggle('is-wait', /^Waiting/.test(s));
+      }
+    };
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => { e.target.classList.toggle('is-on', e.isIntersecting); e.isIntersecting ? visible.add(e.target) : visible.delete(e.target); });
+      if (visible.size && !timer) timer = setInterval(step, 100);
+      else if (!visible.size && timer) { clearInterval(timer); timer = 0; }
+    }, { threshold: 0.25 });
+    cards.forEach((c) => io.observe(c));
+  })();
   if (reduced) { document.querySelector('.fab').classList.add('is-on'); words.forEach((w) => w.classList.add('is-lit')); document.querySelector('.fan3')?.style.setProperty('--open', 1); return; }
   document.documentElement.classList.add('js');
 

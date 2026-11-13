@@ -148,17 +148,17 @@
           <p data-fx>Challenge a friend or a player anywhere in the world, turn by turn. No timers: take your turn whenever it suits you.</p>
         </article>
         <article class="row">
-          <div class="row__art phone phone--iphone"><div class="phone__screen"><img src="assets/shots/screen-themes.webp" alt="The Tile Themes album" width="620" height="1325" loading="lazy"></div></div>
+          <div class="row__art phone phone--iphone"><div class="phone__screen"><img src="assets/shots/screen-themes.webp" alt="The tile shelf in the Tile Themes album" width="620" height="1325" loading="lazy"></div></div>
           <h2 data-fx>Collect tile themes</h2>
           <p data-fx>Open card packs, fill each tile's four parts and unlock new tile themes. Complete whole albums for bonus rewards.</p>
         </article>
         <article class="row">
-          <div class="row__art phone phone--iphone"><div class="phone__screen"><img src="assets/shots/screen-events.webp" alt="Treasure Dig: how to dig" width="620" height="1325" loading="lazy"></div></div>
+          <div class="row__art phone phone--iphone"><div class="phone__screen"><img src="assets/shots/screen-events.webp" alt="The Treasure Dig board" width="620" height="1325" loading="lazy"></div></div>
           <h2 data-fx>Events every week</h2>
           <p data-fx>Dig for treasure in Treasure Dig, race in Word Rally and bounce for prizes in Bonus Bounce. A new event is always on its way.</p>
         </article>
         <article class="row">
-          <div class="row__art phone phone--iphone"><div class="phone__screen"><img src="assets/shots/screen-won.webp" alt="A won match" width="620" height="1325" loading="lazy"></div></div>
+          <div class="row__art phone phone--iphone"><div class="phone__screen"><img src="assets/shots/screen-won.webp" alt="The results screen after a win" width="620" height="1325" loading="lazy"></div></div>
           <h2 data-fx>Get the game today!</h2>
           <p data-fx>Letter Legends is free to play, with optional purchases. Coming soon to iPhone and Android.</p>
           <a class="pill pill--dark" href="#get" data-fx>Get the game</a>
@@ -167,28 +167,40 @@
     </div>
   </section>
 
-  <!-- MORE TO PLAY: three cards -->
+  <!-- MORE TO PLAY: a feature grid after lesa.app/features; each card's art loops while it is on screen -->
   <section class="sky more" id="more" aria-labelledby="more-h">
     <h2 class="h2" id="more-h" data-fx>More to play, every day</h2>
     <p class="lede" data-fx>Something new is always waiting when you open the game.</p>
-    <div class="more__grid">
-      <article class="post" data-fx>
-        <div class="ph ph--post" style="--ph-bg:#2BC160" data-label="Word of the Day art"></div>
-        <small>Daily</small>
-        <h3>Word of the Day</h3>
-        <p>Unscramble the day's seven-letter word to win the chest.</p>
+    <div class="bento">
+      <article class="bx bx--wide" data-fx data-loop>
+        <h3>A new puzzle every day</h3>
+        <div class="bx__art"><div class="wotd" aria-label="Scrambled letters sorting themselves into LEGENDS"><img src="assets/tiles/default-l.webp" alt="" style="--dx:3" width="300" height="300"><img src="assets/tiles/default-e.webp" alt="" style="--dx:1" width="300" height="300"><img src="assets/tiles/default-g.webp" alt="" style="--dx:2" width="300" height="300"><img src="assets/tiles/default-e.webp" alt="" style="--dx:3" width="300" height="300"><img src="assets/tiles/default-n.webp" alt="" style="--dx:-3" width="300" height="300"><img src="assets/tiles/default-d.webp" alt="" style="--dx:-5" width="300" height="300"><img src="assets/tiles/default-s.webp" alt="" style="--dx:-1" width="300" height="300"></div></div>
+        <p>Word of the Day: unscramble the day's seven-letter word to win the chest.</p>
       </article>
-      <article class="post" data-fx>
-        <div class="ph ph--post" style="--ph-bg:#EB4F9B" data-label="Leagues art"></div>
-        <small>Weekly</small>
-        <h3>Weekly leagues</h3>
-        <p>Win matches, earn lightning bolts and climb the league table each week.</p>
+      <article class="bx" data-fx data-loop>
+        <h3>Play in your language</h3>
+        <div class="bx__art"><div class="lang" data-langs="English|English (UK)|Español|Français|Deutsch|Italiano|Nederlands|Svenska|Dansk|Norsk"><span class="lang__pill"><small>Play in:</small> <b>English</b></span></div></div>
+        <p>Ten languages, each with its own word list.</p>
       </article>
-      <article class="post" data-fx>
-        <div class="ph ph--post" style="--ph-bg:#FFB800" data-label="Letter Pass art"></div>
-        <small>Every season</small>
-        <h3>Letter Pass</h3>
-        <p>Play to unlock coins, gems, avatar frames and tile themes all season long.</p>
+      <article class="bx" data-fx data-loop>
+        <h3>Climb the weekly leagues</h3>
+        <div class="bx__art"><div class="ring" style="--p:0"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="50"/><circle class="ring__fill" cx="60" cy="60" r="50" pathLength="100"/></svg><div class="ring__in"><img src="assets/art/bolt.webp" alt="" width="200" height="200"><b data-count-to="48">0</b></div></div></div>
+        <p>Win matches to earn lightning bolts and rise up the table every week.</p>
+      </article>
+      <article class="bx" data-fx data-loop>
+        <h3>Rewards all season</h3>
+        <div class="bx__art"><div class="pass"><div class="pass__bar"><i></i></div><img src="assets/art/coin.webp" alt="" style="--at:.2"><img src="assets/art/gem.webp" alt="" style="--at:.5"><img src="assets/art/chest.webp" alt="" style="--at:.82"></div></div>
+        <p>The Letter Pass pays out coins, gems, avatar frames and tile themes as you play.</p>
+      </article>
+      <article class="bx bx--wide" data-fx data-loop>
+        <h3>Make it your own</h3>
+        <div class="bx__art"><div class="frames4"><img class="is-worn" src="assets/art/frame-legendary.webp" alt=""><img src="assets/art/frame-spacey.webp" alt=""><img src="assets/art/frame-carnival.webp" alt=""><img src="assets/art/frame-queen-bee.webp" alt=""></div></div>
+        <p>Avatar frames, tile themes and chat packs. Style is for sale, power never is.</p>
+      </article>
+      <article class="bx" data-fx data-loop>
+        <h3>Play at your pace</h3>
+        <div class="bx__art"><div class="turns" data-turns="Your turn|Waiting on Sam…|Sam played QUIZ for 32|Your turn"><span class="turns__pill"><i></i><b>Your turn</b></span></div></div>
+        <p>Battles have no timers. Take your turn whenever it suits you.</p>
       </article>
     </div>
   </section>
