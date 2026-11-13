@@ -203,3 +203,111 @@ p { margin: 0; }
   .hero .fl[src*="/tiles/"] { display: block; }
   .hero .fl[src*="dog-w"], .hero .fl[src*="fox-k"] { display: none; } /* they would sit on the two-line tagline */
 }
+
+/* ── SCROLL STORIES ───────────────────────────────────────────────────────────────────────────────
+   A tall section with a sticky stage. main.js maps the scroll position through the section to a
+   progress 0..1 and poses every piece from it, so the story moves only while you scroll and holds
+   still the moment you stop. Nothing here has a CSS transition or animation on purpose. */
+.story { position: relative; height: var(--len, 340vh); }
+.story--packs { --len: 360vh; background: linear-gradient(180deg, var(--deep) 0, #6A2BC9 30%, #C2408F 100%); }
+.story--dig { --len: 420vh; background: linear-gradient(180deg, #C2408F 0, #3FA2F7 18%, #7FD0FF 60%, #8BD86B 100%); }
+.story--bounce { --len: 360vh; background: linear-gradient(180deg, #8BD86B 0, #3B1AA6 16%, var(--night) 100%); }
+.story__stage { position: sticky; top: 0; height: 100svh; overflow: hidden; display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  align-items: center; gap: clamp(20px, 4vw, 64px); padding: 84px max(var(--gut), (100% - var(--max)) / 2) 28px; }
+.story--flip .story__copy { order: 2; }
+.story__copy { position: relative; z-index: 2; }
+.story .h2 { font-size: clamp(36px, 4.4vw, 62px); }
+.story__logo { width: min(320px, 70%); margin: 0 0 6px -8px; filter: drop-shadow(0 12px 16px rgba(10,4,40,.35)); }
+.story--dig .h2 { text-shadow: 0 4px 0 rgba(20,60,120,.35); }
+.beats { list-style: none; margin: clamp(18px, 3vw, 30px) 0 0; padding: 0; counter-reset: beat; display: grid; gap: 10px; }
+.beats li { counter-increment: beat; display: flex; align-items: center; gap: 12px; font: 800 clamp(16px, 1.45vw, 19px)/1.3 var(--body); opacity: .45; }
+.beats li::before { content: counter(beat); flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.18); font: 400 18px/1 var(--head); }
+.beats li.is-on { opacity: 1; }
+.beats li.is-on::before { background: var(--gold); color: var(--ink); box-shadow: 0 4px 0 var(--gold-deep); }
+.story__box { position: relative; height: 100%; min-height: 0; display: grid; place-items: center; container-type: size; }
+.story__vis { position: relative; width: min(100cqw, 100cqh * var(--ar)); aspect-ratio: var(--ar); container-type: inline-size; }
+.story__vis img { position: absolute; max-width: none; pointer-events: none; }
+.story__vis > * { will-change: transform, opacity; }
+
+/* card packs */
+.pk { --ar: 1 / 1.02; }
+.pk-glow { position: absolute; inset: -10%; background: radial-gradient(closest-side, rgba(255,214,120,.55), rgba(255,120,200,.18) 55%, transparent); opacity: 0; }
+.pk-pack { position: absolute; left: 50%; top: 46%; width: 44%; aspect-ratio: 440 / 696; translate: -50% -50%; }
+.pk-pack img { inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 2.4cqw 3cqw rgba(30,6,70,.45)); }
+/* the tear: a zigzag line 19% down the wrapper; top and body use complementary polygons */
+.pk-top { clip-path: polygon(0 0, 100% 0, 100% 19%, 92% 23%, 84% 18%, 76% 23%, 68% 18%, 60% 23%, 52% 18%, 44% 23%, 36% 18%, 28% 23%, 20% 18%, 12% 23%, 4% 18%, 0 21%); }
+.pk-body { clip-path: polygon(0 21%, 4% 18%, 12% 23%, 20% 18%, 28% 23%, 36% 18%, 44% 23%, 52% 18%, 60% 23%, 68% 18%, 76% 23%, 84% 18%, 92% 23%, 100% 19%, 100% 100%, 0 100%); }
+.pk-flash { position: absolute; left: 50%; top: 34%; width: 70%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; background: radial-gradient(closest-side, #fff, rgba(255,240,200,.6) 40%, transparent); opacity: 0; mix-blend-mode: screen; }
+.pk-parts { position: absolute; inset: 0; }
+.pk-card { position: absolute; top: 28%; width: 21.5%; aspect-ratio: 965 / 1434; perspective: 900px; }
+.pk-inner { position: absolute; inset: 0; transform-style: preserve-3d; }
+.pk-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.pk-face > img { inset: 0; width: 100%; height: 100%; }
+.pk-front { transform: rotateY(180deg); }
+.pk-front .pk-art { left: 14%; top: 13%; width: 72%; height: auto; filter: drop-shadow(0 .8cqw 1cqw rgba(30,6,70,.3)); }
+.pk-dia { position: absolute; left: 0; right: 0; top: 63%; text-align: center; font-size: 2.6cqw; letter-spacing: .1em; color: #FFD34D; text-shadow: 0 .25cqw 0 rgba(60,20,90,.5); }
+.pk-name { position: absolute; left: 0; right: 0; top: 72%; text-align: center; font: 400 3.6cqw/1 var(--head); text-transform: uppercase; color: #fff; text-shadow: 0 .35cqw 0 rgba(40,10,80,.55); }
+.pk-bar { position: absolute; top: 64.5%; width: 21.5%; height: 4.6cqw; border-radius: 99px; background: rgba(30,6,70,.45); box-shadow: inset 0 .3cqw .6cqw rgba(0,0,0,.35), 0 0 0 .45cqw rgba(255,255,255,.85); overflow: hidden; opacity: 0; }
+.pk-fill { position: absolute; inset: 0; transform-origin: 0 50%; border-radius: inherit; background: linear-gradient(180deg, #7EE0FF, #2E8BFF); }
+.pk-bar.is-full .pk-fill { background: linear-gradient(180deg, #FFE27A, #F5A30B); }
+.pk-count { position: absolute; inset: 0; display: grid; place-items: center; font: 900 2.4cqw/1 var(--body); color: #fff; text-shadow: 0 .2cqw 0 rgba(0,0,0,.4); }
+.pk-check { position: absolute; top: 61.6%; width: 6.4cqw; aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; background: #2BC160; box-shadow: 0 .5cqw 0 #178a40, 0 0 0 .5cqw #fff; color: #fff; font: 900 3.6cqw/1 var(--body); scale: 0; }
+.pk-unlock { position: absolute; inset: 0; pointer-events: none; }
+.pk-rays { position: absolute; left: 50%; top: 45%; width: 120%; aspect-ratio: 1; translate: -50% -50%; opacity: 0;
+  background: repeating-conic-gradient(from 0deg, rgba(255,236,170,.55) 0 9deg, transparent 9deg 22.5deg);
+  -webkit-mask: radial-gradient(closest-side, #000 15%, transparent 72%); mask: radial-gradient(closest-side, #000 15%, transparent 72%); }
+.pk-tile { left: 50%; top: 45%; width: 46%; translate: -50% -50%; opacity: 0; filter: drop-shadow(0 3cqw 4cqw rgba(30,6,70,.5)); }
+.pk-label { position: absolute; left: 0; right: 0; top: 78%; text-align: center; font: 400 7cqw/1 var(--head); text-transform: uppercase; color: #fff; text-shadow: 0 .7cqw 0 rgba(60,10,90,.5); opacity: 0; }
+
+/* treasure dig */
+.dg { --ar: 1000 / 1108; }
+.dg-board { inset: 0; width: 100%; height: 100%; border-radius: 6cqw; box-shadow: 0 4cqw 8cqw rgba(20,50,90,.35); }
+.dg-grid { position: absolute; inset: 0; }
+.dg-cell { position: absolute; }
+.dg-cell > * { position: absolute; inset: 0; width: 100%; height: 100%; }
+.dg-cell .dg-loot { inset: 16% 18%; width: 64%; height: 68%; object-fit: contain; scale: 0; filter: drop-shadow(0 .6cqw .6cqw rgba(0,0,0,.35)); }
+.dg-shard { background: url(assets/story/undug.webp) center / 100% 100% no-repeat; }
+.dg-dim { position: absolute; inset: 0; border-radius: 6cqw; background: rgba(30,12,60,.55); opacity: 0; }
+.dg-pick { left: 0; top: 0; width: 20%; transform-origin: 22% 80%; filter: drop-shadow(0 1.2cqw 1.4cqw rgba(0,0,0,.35)); }
+.dg-chest { position: absolute; left: 50%; top: 50%; width: 46%; aspect-ratio: 380 / 394; opacity: 0; }
+.dg-chest img { left: 0; bottom: 0; width: 100%; }
+.dg-open { opacity: 0; }
+.dg-burst, .bb-burst { position: absolute; inset: 0; pointer-events: none; }
+.dg-burst img, .bb-burst img { width: 9%; left: 0; top: 0; opacity: 0; filter: drop-shadow(0 .6cqw .8cqw rgba(0,0,0,.3)); }
+.dg-label, .bb-label { position: absolute; left: 0; right: 0; text-align: center; font: 400 8cqw/1 var(--head); text-transform: uppercase; color: #fff; text-shadow: 0 .8cqw 0 rgba(40,10,80,.55); opacity: 0; }
+.dg-label { top: 13%; }
+
+/* bonus bounce */
+.bb { --ar: 1155 / 2156; }
+.bb-board { inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 4cqw 7cqw rgba(0,0,0,.45)); }
+.bb-field { position: absolute; inset: 0; }
+.bb-peg { position: absolute; width: 1.6%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #C9C3FF, #A49CFF 45%, #6B5FEA); box-shadow: 0 .3cqw .4cqw rgba(0,0,0,.4); }
+.bb-peg i { position: absolute; inset: -160%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,240,170,.95), rgba(255,200,90,.35) 50%, transparent); opacity: 0; }
+.bb-bump { position: absolute; translate: -50% -50%; }
+.bb-bump img { position: static; width: 100%; }
+.bb-bump i { position: absolute; inset: -18%; border-radius: 50%; background: radial-gradient(closest-side, rgba(150,230,255,.85), transparent); opacity: 0; mix-blend-mode: screen; }
+.bb-prize { position: absolute; width: 9%; translate: -50% -50%; text-align: center; }
+.bb-prize img { position: static; width: 100%; filter: drop-shadow(0 .5cqw .5cqw rgba(0,0,0,.35)); }
+.bb-prize b { display: block; margin-top: -.6cqw; font: 400 4.6cqw/1 var(--head); color: #fff; -webkit-text-stroke: .9cqw #323977; paint-order: stroke fill; }
+.bb-prize--jack b { -webkit-text-stroke-color: #7D3C0E; }
+.bb-win { position: absolute; width: 18%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,226,120,.9), rgba(255,170,40,.35) 55%, transparent); opacity: 0; mix-blend-mode: screen; }
+.bb-ball { position: absolute; left: 0; top: 0; width: 4.85%; aspect-ratio: 1; opacity: 0; filter: drop-shadow(0 .6cqw .6cqw rgba(0,0,0,.4)); }
+.bb-ball img { position: static; width: 100%; }
+.bb-label { top: 45%; font-size: 13cqw; }
+
+@media (max-width: 860px) {
+  .story__stage { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); align-items: stretch; gap: 14px; padding-top: 76px; text-align: center; }
+  .story--flip .story__copy { order: 0; }
+  .story__logo { width: min(200px, 50%); margin: 0 auto 2px; display: block; }
+  .story .h2 { font-size: clamp(32px, 9vw, 44px); }
+  .beats { margin-top: 10px; display: grid; }
+  .beats li { grid-area: 1 / 1; justify-content: center; font-size: 15px; opacity: 0; } /* stacked: only the live beat shows, counters still count */
+  .beats li.is-on { opacity: 1; }
+  .beats li::before { width: 28px; height: 28px; font-size: 15px; }
+}
+/* reduced motion: no pinning, every story shown in its finished state */
+@media (prefers-reduced-motion: reduce) {
+  .story { height: auto; }
+  .story__stage { position: relative; height: auto; min-height: 100svh; }
+  .story__box { height: min(80svh, 720px); }
+}
