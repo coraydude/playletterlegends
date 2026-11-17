@@ -26,7 +26,7 @@
   // (neither listing is public yet; both URLs 404 today). Flip each to true the day it goes public.
   // 404.html (the /i/<code> invite page) has its own APP_STORE_LIVE for the same day.
   const STORES = {
-    ios: { live: false, url: 'https://apps.apple.com/app/id6785250916' },
+    ios: { live: true, url: 'https://apps.apple.com/app/id6785250916' },
     android: { live: false, url: 'https://play.google.com/store/apps/details?id=com.glitchyard.letterlegends' },
   };
   const live = Object.values(STORES).filter((s) => s.live).length;
