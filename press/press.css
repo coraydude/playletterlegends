@@ -118,7 +118,8 @@ h1, h2, h3, p, dl, dd, ul, figure { margin: 0; }
 .tile span small { display: block; font-weight: 700; color: var(--ink-2); }
 .tile--art img { aspect-ratio: 1; object-fit: contain; padding: 10px; border-radius: 12px;
   background: conic-gradient(#EEF3FB 25%, #fff 0 50%, #EEF3FB 0 75%, #fff 0) 0 0 / 22px 22px; }
-.tile--dark img { background: var(--sky); }
+/* GlitchYard's brand violet (glitchyard.co --violet) behind the studio logo */
+.tile--dark img { background: #5B2BD6; }
 .tile--wide { grid-column: span 2; }
 .tile--wide img { aspect-ratio: 2.1; }
 @media (max-width: 560px) { .tile--wide img { aspect-ratio: 2.1; } }
@@ -126,7 +127,7 @@ h1, h2, h3, p, dl, dd, ul, figure { margin: 0; }
 /* studio + contact */
 .card--split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); }
 .card--split p + p { margin-top: 12px; }
-.studio { display: inline-block; margin-top: 18px; padding: 14px 18px; border-radius: 18px; background: var(--sky); transition: transform .2s cubic-bezier(.3,1.6,.5,1); }
+.studio { display: inline-block; margin-top: 18px; padding: 14px 18px; border-radius: 18px; background: #5B2BD6; transition: transform .2s cubic-bezier(.3,1.6,.5,1); }
 .studio:hover { transform: translateY(-3px); }
 .studio img { height: 44px; width: auto; }
 @media (max-width: 720px) { .card--split { grid-template-columns: 1fr; } }
