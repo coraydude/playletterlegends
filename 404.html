@@ -30,10 +30,10 @@
   // The invite code rides in the path: /i/<CODE>. It is the inviter's PlayFab id (16 hex).
   var ANDROID_PACKAGE = "com.glitchyard.letterlegends";
   var APP_STORE_ID = "6785250916";   // App Store Connect Apple ID (StoreMetadata.AppStoreId)
-  var APP_STORE_LIVE = false;         // flip to true the day the App Store listing is published
+  var APP_STORE_LIVE = true;          // flip to true the day the App Store listing is published
   var m = /\/i\/([0-9A-Za-z]{1,32})/.exec(location.pathname);
   var code = m ? m[1].toUpperCase() : "";
-  if (!code) { var l = document.getElementById("lede"); if (l) l.textContent = "The word game where every letter counts. Free on Google Play."; }
+  if (!code) { var l = document.getElementById("lede"); if (l) l.textContent = "The word game where every letter counts. Free on the App Store, coming soon to Google Play."; }
   var referrer = code ? "&referrer=" + encodeURIComponent("ll_invite=" + code) : "";
   var play = "https://play.google.com/store/apps/details?id=" + ANDROID_PACKAGE + referrer;
   var ios = (APP_STORE_ID && APP_STORE_LIVE) ? "https://apps.apple.com/app/id" + APP_STORE_ID : "";
